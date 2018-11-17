@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>CSS之堆叠上下文 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"为什么我们要了解什么是堆叠上下文？\n1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。\n2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！\n\n堆叠顺序元素和元素属性的堆叠顺序是不同的。如下所示，数字越大代表越靠前显示。\n1. background\n\n2. border\n\n3. 块级\n\n4. 浮动\n\n5. 内联\n\n6. z-index: 0\n\n7. z-index: +\n如果是兄弟元素重叠，那么后面的盖在前面的身上。\nz-index：-1，那么要分情况。\n如果div是没有定位的，那么z-index：-1 会出现在background后面。\n如果div是定位了的，那么z-index：-1 会出现在DIV的后面（也就是2和3之间）。\n\n堆叠上下文可以理解为堆叠作用域。跟 BFC 一样，我们只知道一些属性会触发堆叠上下文，但并不知道堆叠上下文是什么。\n根元素 (HTML),\n\nz-index 值不为 &quot;auto&quot;的 绝对/相对定位，\n\n一个 z-index 值不为 &quot;auto&quot;的 flex 项目 (flex item)，即：父元素 display: flex|inline-flex，\n\nopacity 属性值小于 1 的元素（参考 the specification for opacity），\n\ntransform 属性值不为 &quot;none&quot;的元素，\n\nmix-blend-mode 属性值不为 &quot;normal&quot;的元素，\n\nfilter值不为“none”的元素，\n\nperspective值不为“none”的元素，\n\nisolation 属性被设置为 &quot;isolate&quot;的元素，\n\nposition: fixed\n\n在 will-change 中指定了任意 CSS 属性，即便你没有直接指定这些属性的值（参考 这篇文章）\n\n-webkit-overflow-scrolling 属性被设置 &quot;touch&quot;的元素\n怎么理解html中div的堆叠上下文？比如两个div如图所示，两个父div不是默认定位。它们两个之间先比较他们的z-index值，大的优先显示。\n就好像一个公司里的2个大部门，谁的KPI高，谁就受到总裁重视，自然地位高。\n但是为什么它们的z-index值相同，也是b元素先显示呢？\n再打个比方，b部门是后成立的。好比新官上任三把火，表现要比老部门更抢眼一点，所以b的地位更高一点。\n那两个父div比较完了，它们分别的子元素直接z-index值有什么关系呢？答案是子元素只跟自己父元素里的其他子元素z-index值比较大小。跟其他父元素的子元素显示先后就要看它们父元素的z-index值了。\n这怎么理解？可以认为b部门比a部门表现抢眼，那么总裁就认为b部门的人工作能力就是a部门的人要强！（活生生的实例啊，说明选择比努力更加重要。。）\n总结：如果父元素是默认定位，那么子元素可以跨元素进行比较z-index值；如果父元素不是默认定位，那么子元素只跟自己父元素内的子元素进行比较z-index值。\n就像一个公司刚成立，哪有那么多的部门划分，撸起袖子就是干！谁的能力强，谁的KPI就高，老板就更欣赏谁，谁的地位也越高。但是公司发展之后，成立了大大小小各个部门。可能有的部门比其他部门要抢眼，或者有的部门是后成立的。这时候老板只看部门不看人，哪个部门产值高，哪个部门在老板眼中地位就高，至于个人的优秀与否老板不管。个人的能力只在其部门里，让他的主管去考量，跟同部门的人去竞争。（再次说明跟住一个好领导的重要性，个人地位也跟着部门地位水涨船高。）\n\n","dateCreated":"2018-11-12T20:22:11+08:00","dateModified":"2018-11-12T20:45:00+08:00","datePublished":"2018-11-12T20:22:11+08:00","description":"为什么我们要了解什么是堆叠上下文？\n1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。\n2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！","headline":"CSS之堆叠上下文","image":["https://i.loli.net/2018/11/11/5be83ef037b51.jpg","https://i.loli.net/2018/11/12/5be97422b389b.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/11/12/CSS之堆叠上下文/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/11/12/CSS之堆叠上下文/","keywords":"前端, CSS","thumbnailUrl":"https://i.loli.net/2018/11/11/5be83ef037b51.jpg"}</script>
+    <meta name="description" content="为什么我们要了解什么是堆叠上下文？ 1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。 2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！">
+<meta name="keywords" content="前端,CSS">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS之堆叠上下文">
+<meta property="og:url" content="/2018/11/12/CSS之堆叠上下文/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为什么我们要了解什么是堆叠上下文？ 1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。 2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.loli.net/2018/11/12/5be974da10110.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/12/5be975bfac715.jpg">
+<meta property="og:updated_time" content="2018-11-12T12:45:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS之堆叠上下文">
+<meta name="twitter:description" content="为什么我们要了解什么是堆叠上下文？ 1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。 2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！">
+<meta name="twitter:image" content="https://i.loli.net/2018/11/12/5be974da10110.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/11/5be83ef037b51.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/11/5be83ef037b51.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/12/5be97422b389b.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/12/5be97422b389b.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.loli.net/2018/11/12/5be97422b389b.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            CSS之堆叠上下文
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>为什么我们要了解什么是堆叠上下文？</p>
+<p>1.这可以让我们明确实际开发网页中，每个元素的显示顺序到底是什么样的。</p>
+<p>2.可以了解为什么开发过程中会有这样或者那样的显示问题？并且解决它！<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆叠顺序"><span class="toc-text">堆叠顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆叠上下文"><span class="toc-text">堆叠上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么理解html中div的堆叠上下文？"><span class="toc-text">怎么理解html中div的堆叠上下文？</span></a></li></ol>
+<h2 id="堆叠顺序"><a href="#堆叠顺序" class="headerlink" title="堆叠顺序"></a>堆叠顺序</h2><p>元素和元素属性的堆叠顺序是不同的。如下所示，数字越大代表越靠前显示。</p>
+<pre><code>1. background
+
+2. border
+
+3. 块级
+
+4. 浮动
+
+5. 内联
+
+6. z-index: 0
+
+7. z-index: +
+</code></pre><p>如果是兄弟元素重叠，那么后面的盖在前面的身上。</p>
+<p>z-index：-1，那么要分情况。</p>
+<p>如果div是没有定位的，那么z-index：-1 会出现在background后面。</p>
+<p>如果div是定位了的，那么z-index：-1 会出现在DIV的后面（也就是2和3之间）。</p>
+<p><img src="https://i.loli.net/2018/11/12/5be974da10110.jpg" alt=""></p>
+<h2 id="堆叠上下文"><a href="#堆叠上下文" class="headerlink" title="堆叠上下文"></a>堆叠上下文</h2><p>可以理解为堆叠作用域。跟 BFC 一样，我们只知道一些属性会触发堆叠上下文，但并不知道堆叠上下文是什么。</p>
+<pre><code>根元素 (HTML),
+
+z-index 值不为 &quot;auto&quot;的 绝对/相对定位，
+
+一个 z-index 值不为 &quot;auto&quot;的 flex 项目 (flex item)，即：父元素 display: flex|inline-flex，
+
+opacity 属性值小于 1 的元素（参考 the specification for opacity），
+
+transform 属性值不为 &quot;none&quot;的元素，
+
+mix-blend-mode 属性值不为 &quot;normal&quot;的元素，
+
+filter值不为“none”的元素，
+
+perspective值不为“none”的元素，
+
+isolation 属性被设置为 &quot;isolate&quot;的元素，
+
+position: fixed
+
+在 will-change 中指定了任意 CSS 属性，即便你没有直接指定这些属性的值（参考 这篇文章）
+
+-webkit-overflow-scrolling 属性被设置 &quot;touch&quot;的元素
+</code></pre><h2 id="怎么理解html中div的堆叠上下文？"><a href="#怎么理解html中div的堆叠上下文？" class="headerlink" title="怎么理解html中div的堆叠上下文？"></a>怎么理解html中div的堆叠上下文？</h2><p><strong>比如两个div如图所示，两个父div不是默认定位。它们两个之间先比较他们的z-index值，大的优先显示。</strong></p>
+<p>就好像一个公司里的2个大部门，谁的KPI高，谁就受到总裁重视，自然地位高。</p>
+<p><strong>但是为什么它们的z-index值相同，也是b元素先显示呢？</strong></p>
+<p>再打个比方，b部门是后成立的。好比新官上任三把火，表现要比老部门更抢眼一点，所以b的地位更高一点。</p>
+<p><strong>那两个父div比较完了，它们分别的子元素直接z-index值有什么关系呢？答案是子元素只跟自己父元素里的其他子元素z-index值比较大小。跟其他父元素的子元素显示先后就要看它们父元素的z-index值了。</strong></p>
+<p>这怎么理解？可以认为b部门比a部门表现抢眼，那么总裁就认为b部门的人工作能力就是a部门的人要强！（活生生的实例啊，说明选择比努力更加重要。。）</p>
+<p><strong>总结：如果父元素是默认定位，那么子元素可以跨元素进行比较z-index值；如果父元素不是默认定位，那么子元素只跟自己父元素内的子元素进行比较z-index值。</strong></p>
+<p>就像一个公司刚成立，哪有那么多的部门划分，撸起袖子就是干！谁的能力强，谁的KPI就高，老板就更欣赏谁，谁的地位也越高。但是公司发展之后，成立了大大小小各个部门。可能有的部门比其他部门要抢眼，或者有的部门是后成立的。这时候老板只看部门不看人，哪个部门产值高，哪个部门在老板眼中地位就高，至于个人的优秀与否老板不管。个人的能力只在其部门里，让他的主管去考量，跟同部门的人去竞争。（再次说明跟住一个好领导的重要性，个人地位也跟着部门地位水涨船高。）</p>
+<p><img src="https://i.loli.net/2018/11/12/5be975bfac715.jpg" alt=""></p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/CSS/">CSS</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

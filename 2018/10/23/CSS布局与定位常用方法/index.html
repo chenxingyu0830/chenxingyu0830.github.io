@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>CSS布局与定位常用方法 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。\n\nCSS布局与定位\n本次主要介绍如何使用CSS作出左右布局左中右布局水平居中垂直居中等其他小技巧\n\n左右布局方法：1.给子元素设置浮动float:left&amp;right，父元素清除浮动clearfix。作用：清除浮动效果后父元素的塌陷。\n.clearfix::after{\n  content: &apos;&apos;;\n  display: block;\n  clear: both;\n}\n代码：\nhtml:\n\n&lt;div class=&quot;baba clearfix&quot;&gt;\n&lt;div class=&quot;left&quot;&gt;&lt;/div&gt;\n&lt;div class=&quot;right&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n\ncss:\n\n.clearfix::after{\n  content: &apos;&apos;;\n  display: block;\n  clear: both;\n}\n\n.baba{\n  border: 1px solid red;\n  width: 300px;;\n}\n\n.left{\n  width: 50%;\n  height: 100px;\n  background: #000;\n  float: left;\n}\n.right{\n  width: 50%;\n  height: 100px;\n  background: green;\n  float: left;　\n}\n \n2.绝对定位\n\n3.inline-block\n\n左中右布局方法：和左右布局一样，float+clearfix\n\n水平居中内联元素方法：父元素身上写text-align:center;\n\n除了文本类型，div类型block属性变成inline-block可以实现同行效果。\n内联元素方法：\ndiv类型实现分行效果。\n\n\n垂直居中7种方法1.水平垂直居中\n\n2.利用margin:auto来实现居中\n\n3.使用父元素table &amp; 子元素table-cell布局，实现水平和垂直居中\n\n同时可以设置table-cell高度。\n\n\n4.使用绝对定位，position: absolute;top: 50%;left: 50%; margin-top: -50px; margin-left: -50% (这是在知道该元素的具体高度和宽度)\n\n5.使用绝对定位，不知道具体的高度和宽度。position: absolute;top: 50%;left: 50%;transform：translate(-50%,-50%)\n\n6.使用flex。 在父元素上面设置： display: flex; justify-content: center; align-items: center\n\n7.使用绝对定位，margin。 在子元素上面设置：position: absolute；top:0;bottom: 0;right: 0;left: 0; margin: auto\n\n可以固定div垂直居中。\n\n\n","dateCreated":"2018-10-23T10:30:46+08:00","dateModified":"2018-10-24T15:23:16+08:00","datePublished":"2018-10-23T10:30:46+08:00","description":"介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。","headline":"CSS布局与定位常用方法","image":["https://i.imgur.com/b56hWv1.jpg","https://i.imgur.com/vE4bi6t.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/23/CSS布局与定位常用方法/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/23/CSS布局与定位常用方法/","keywords":"前端, CSS","thumbnailUrl":"https://i.imgur.com/b56hWv1.jpg"}</script>
+    <meta name="description" content="介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。">
+<meta name="keywords" content="前端,CSS">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS布局与定位常用方法">
+<meta property="og:url" content="/2018/10/23/CSS布局与定位常用方法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.imgur.com/7fESYeu.jpg">
+<meta property="og:image" content="https://i.imgur.com/lui4wge.jpg">
+<meta property="og:image" content="https://i.imgur.com/3KAXgvy.jpg">
+<meta property="og:image" content="https://i.imgur.com/LofK7Pg.jpg">
+<meta property="og:image" content="https://i.imgur.com/UPtO3sH.jpg">
+<meta property="og:image" content="https://i.imgur.com/dCDrSCO.jpg">
+<meta property="og:image" content="https://i.imgur.com/hR7evlQ.jpg">
+<meta property="og:image" content="https://i.imgur.com/9p2OKUR.jpg">
+<meta property="og:image" content="https://i.imgur.com/ETLLVt8.jpg">
+<meta property="og:image" content="https://i.imgur.com/fjSSIlX.jpg">
+<meta property="og:image" content="https://i.imgur.com/5eEG0bV.jpg">
+<meta property="og:image" content="https://i.imgur.com/9CV5fIw.jpg">
+<meta property="og:image" content="https://i.imgur.com/5EPvrqx.jpg">
+<meta property="og:updated_time" content="2018-10-24T07:23:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS布局与定位常用方法">
+<meta name="twitter:description" content="介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。">
+<meta name="twitter:image" content="https://i.imgur.com/7fESYeu.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/b56hWv1.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/b56hWv1.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/vE4bi6t.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/vE4bi6t.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/vE4bi6t.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            CSS布局与定位常用方法
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>介绍左右布局，左中右布局，水平居中，垂直居中等常用技巧。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS布局与定位"><span class="toc-text">CSS布局与定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#左右布局"><span class="toc-text">左右布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左中右布局"><span class="toc-text">左中右布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#水平居中"><span class="toc-text">水平居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内联元素方法："><span class="toc-text">内联元素方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内联元素方法：-1"><span class="toc-text">内联元素方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垂直居中7种方法"><span class="toc-text">垂直居中7种方法</span></a></li></ol></li></ol>
+<h2 id="CSS布局与定位"><a href="#CSS布局与定位" class="headerlink" title="CSS布局与定位"></a>CSS布局与定位</h2><blockquote>
+<p>本次主要介绍如何使用CSS作出<br>左右布局<br>左中右布局<br>水平居中<br>垂直居中<br>等其他小技巧</p>
+</blockquote>
+<h3 id="左右布局"><a href="#左右布局" class="headerlink" title="左右布局"></a>左右布局</h3><p>方法：<br>1.给子元素设置浮动float:left&amp;right，父元素清除浮动clearfix。<br>作用：清除浮动效果后父元素的塌陷。</p>
+<pre><code>.clearfix::after{
+  content: &apos;&apos;;
+  display: block;
+  clear: both;
+}
+</code></pre><p>代码：</p>
+<pre><code>html:
+
+&lt;div class=&quot;baba clearfix&quot;&gt;
+&lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+css:
+
+.clearfix::after{
+  content: &apos;&apos;;
+  display: block;
+  clear: both;
+}
+
+.baba{
+  border: 1px solid red;
+  width: 300px;;
+}
+
+.left{
+  width: 50%;
+  height: 100px;
+  background: #000;
+  float: left;
+}
+.right{
+  width: 50%;
+  height: 100px;
+  background: green;
+  float: left;　
+}
+</code></pre><p> <img src="https://i.imgur.com/7fESYeu.jpg" alt="直接float"></p>
+<p>2.绝对定位</p>
+<p><img src="https://i.imgur.com/lui4wge.jpg" alt="绝对定位"></p>
+<p>3.inline-block</p>
+<p><img src="https://i.imgur.com/3KAXgvy.jpg" alt="inline-block"></p>
+<h3 id="左中右布局"><a href="#左中右布局" class="headerlink" title="左中右布局"></a>左中右布局</h3><p>方法：和左右布局一样，float+clearfix</p>
+<p><img src="https://i.imgur.com/LofK7Pg.jpg" alt=""></p>
+<h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="内联元素方法："><a href="#内联元素方法：" class="headerlink" title="内联元素方法："></a>内联元素方法：</h4><p>父元素身上写text-align:center;</p>
+<p><img src="https://i.imgur.com/UPtO3sH.jpg" alt=""></p>
+<p>除了文本类型，div类型block属性变成inline-block可以实现同行效果。</p>
+<h4 id="内联元素方法：-1"><a href="#内联元素方法：-1" class="headerlink" title="内联元素方法："></a>内联元素方法：</h4><blockquote>
+<p>div类型实现分行效果。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/dCDrSCO.jpg" alt=""></p>
+<h3 id="垂直居中7种方法"><a href="#垂直居中7种方法" class="headerlink" title="垂直居中7种方法"></a>垂直居中7种方法</h3><p>1.水平垂直居中</p>
+<p><img src="https://i.imgur.com/hR7evlQ.jpg" alt=""></p>
+<p>2.利用margin:auto来实现居中</p>
+<p><img src="https://i.imgur.com/9p2OKUR.jpg" alt=""></p>
+<p>3.使用父元素table &amp; 子元素table-cell布局，实现水平和垂直居中</p>
+<blockquote>
+<p>同时可以设置table-cell高度。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/ETLLVt8.jpg" alt=""></p>
+<p>4.使用绝对定位，position: absolute;top: 50%;left: 50%; margin-top: -50px; margin-left: -50% (这是在知道该元素的具体高度和宽度)</p>
+<p><img src="https://i.imgur.com/fjSSIlX.jpg" alt=""></p>
+<p>5.使用绝对定位，不知道具体的高度和宽度。position: absolute;top: 50%;left: 50%;transform：translate(-50%,-50%)</p>
+<p><img src="https://i.imgur.com/5eEG0bV.jpg" alt=""></p>
+<p>6.使用flex。 在父元素上面设置： display: flex; justify-content: center; align-items: center</p>
+<p><img src="https://i.imgur.com/9CV5fIw.jpg" alt=""></p>
+<p>7.使用绝对定位，margin。 在子元素上面设置：position: absolute；top:0;bottom: 0;right: 0;left: 0; margin: auto</p>
+<blockquote>
+<p>可以固定div垂直居中。</p>
+</blockquote>
+<p><img src="https://i.imgur.com/5EPvrqx.jpg" alt=""></p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/CSS/">CSS</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>Git入门教程 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"简单介绍git本地库创建和上传到githup的命令。\n\ngit init命令git init命令的作用是在当前目录新建一个Git代码库。通过建立本地Git代码库，可以上传和下载Githup上的代码。方便我们保留和分享代码。\n     \ngit add命令git add命令的作用是添加指定文件到暂存区，当我们使用git commit命令时，git将依据暂存区中的内容来进行文件的提交。\n     \ngit commit -v命令git commit -v主要是将暂存区里的改动提交到本地的版本库，并且提交时显示所有diff信息。然后通过pull和push命令可以将本地git代码库上传到远程git代码库。\n","dateCreated":"2018-10-12T10:13:19+08:00","dateModified":"2018-10-28T21:20:32+08:00","datePublished":"2018-10-12T10:13:19+08:00","description":"简单介绍git本地库创建和上传到githup的命令。","headline":"Git入门教程","image":["https://i.imgur.com/njJ9acL.png","https://i.imgur.com/WmLji36.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/12/Git入门教程/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/12/Git入门教程/","keywords":"前端, 命令","thumbnailUrl":"https://i.imgur.com/njJ9acL.png"}</script>
+    <meta name="description" content="简单介绍git本地库创建和上传到githup的命令。">
+<meta name="keywords" content="前端,命令">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Git入门教程">
+<meta property="og:url" content="/2018/10/12/Git入门教程/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单介绍git本地库创建和上传到githup的命令。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-28T13:20:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git入门教程">
+<meta name="twitter:description" content="简单介绍git本地库创建和上传到githup的命令。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/njJ9acL.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/njJ9acL.png" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/WmLji36.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/WmLji36.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/WmLji36.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            Git入门教程
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>简单介绍git本地库创建和上传到githup的命令。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-init命令"><span class="toc-text">git init命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add命令"><span class="toc-text">git add命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit-v命令"><span class="toc-text">git commit -v命令</span></a></li></ol>
+<h3 id="git-init命令"><a href="#git-init命令" class="headerlink" title="git init命令"></a>git init命令</h3><p>git init命令的作用是在当前目录新建一个Git代码库。通过建立本地Git代码库，可以上传和下载Githup上的代码。方便我们保留和分享代码。</p>
+<p><br>     </p>
+<h3 id="git-add命令"><a href="#git-add命令" class="headerlink" title="git add命令"></a>git add命令</h3><p>git add命令的作用是添加指定文件到暂存区，当我们使用git commit命令时，git将依据暂存区中的内容来进行文件的提交。</p>
+<p><br>     </p>
+<h3 id="git-commit-v命令"><a href="#git-commit-v命令" class="headerlink" title="git commit -v命令"></a>git commit -v命令</h3><p>git commit -v主要是将暂存区里的改动提交到本地的版本库，并且提交时显示所有diff信息。然后通过pull和push命令可以将本地git代码库上传到远程git代码库。</p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a> <a class="tag tag--primary tag--small t-link" href="/tags/命令/">命令</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

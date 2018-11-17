@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>了解空标签和可替换标签 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"简单了解空标签和可替换元素的具体含义，有哪些空标签。\n\n空标签\n空标记就是不标记任何内容的标记。而非空标记就是标记有内容的标记。如 &lt;br/&gt; &lt;img/&gt;\n\nHTML中含有以下空元素\n    &lt;area>\n    &lt;base>\n    &lt;br>\n    &lt;col>\n    &lt;colgroup> when the span is present\n    &lt;command>\n    &lt;embed>\n    &lt;hr>\n    &lt;img>\n    &lt;input>\n    &lt;keygen>\n    &lt;link>\n    &lt;meta>\n    &lt;param>\n    &lt;source>\n    &lt;track>\n    &lt;wbr>\n    Note: 在极少数情况下，空元素被错误地称为“无效元素”(void elements)。\n\n\n可替换元素\nCSS 里，可替换元素（replaced element）的展现不是由CSS来控制的。这些元素是一类 外观渲染独立于CSS的 外部对象。\n\n可替换元素概念\n典型的可替换元素有 &lt;img>、 &lt;object>、 &lt;video> 和 表单元素，如&lt;textarea>、 &lt;input> 。 某些元素只在一些特殊情况下表现为可替换元素，例如 &lt;audio> 和 &lt;canvas> 。 通过 CSS content 属性来插入的对象 被称作 匿名可替换元素（anonymous replaced elements）。\n\n\nCSS在某些情况下会对可替换元素做特殊处理，比如计算外边距和一些auto值。\n\n\n需要注意的是，一部分（并非全部）可替换元素，本身具有尺寸和基线（baseline），会被像vertical-align之类的一些 CSS 属性用到。\n","dateCreated":"2018-10-16T19:00:27+08:00","dateModified":"2018-10-24T15:39:58+08:00","datePublished":"2018-10-16T19:00:27+08:00","description":"简单了解空标签和可替换元素的具体含义，有哪些空标签。","headline":"了解空标签和可替换标签","image":["https://i.imgur.com/qXDJyyr.png","https://i.imgur.com/rMsPCLd.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/16/了解空标签和可替换标签/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/16/了解空标签和可替换标签/","keywords":"前端, HTML","thumbnailUrl":"https://i.imgur.com/qXDJyyr.png"}</script>
+    <meta name="description" content="简单了解空标签和可替换元素的具体含义，有哪些空标签。">
+<meta name="keywords" content="前端,HTML">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="了解空标签和可替换标签">
+<meta property="og:url" content="/2018/10/16/了解空标签和可替换标签/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单了解空标签和可替换元素的具体含义，有哪些空标签。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-24T07:39:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了解空标签和可替换标签">
+<meta name="twitter:description" content="简单了解空标签和可替换元素的具体含义，有哪些空标签。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/qXDJyyr.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/qXDJyyr.png" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/rMsPCLd.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/rMsPCLd.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/rMsPCLd.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            了解空标签和可替换标签
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>简单了解空标签和可替换元素的具体含义，有哪些空标签。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#空标签"><span class="toc-text">空标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML中含有以下空元素"><span class="toc-text">HTML中含有以下空元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可替换元素"><span class="toc-text">可替换元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可替换元素概念"><span class="toc-text">可替换元素概念</span></a></li></ol></li></ol>
+<h2 id="空标签"><a href="#空标签" class="headerlink" title="空标签"></a>空标签</h2><blockquote>
+<p>空标记就是不标记任何内容的标记。而非空标记就是标记有内容的标记。如 &lt;br/&gt; &lt;img/&gt;</p>
+</blockquote>
+<h3 id="HTML中含有以下空元素"><a href="#HTML中含有以下空元素" class="headerlink" title="HTML中含有以下空元素"></a>HTML中含有以下空元素</h3><pre>
+    &lt;area>
+    &lt;base>
+    &lt;br>
+    &lt;col>
+    &lt;colgroup> when the span is present
+    &lt;command>
+    &lt;embed>
+    &lt;hr>
+    &lt;img>
+    &lt;input>
+    &lt;keygen>
+    &lt;link>
+    &lt;meta>
+    &lt;param>
+    &lt;source>
+    &lt;track>
+    &lt;wbr>
+    Note: 在极少数情况下，空元素被错误地称为“无效元素”(void elements)。
+</pre>
+
+<h2 id="可替换元素"><a href="#可替换元素" class="headerlink" title="可替换元素"></a>可替换元素</h2><blockquote>
+<p>CSS 里，可替换元素（replaced element）的展现不是由CSS来控制的。这些元素是一类 外观渲染独立于CSS的 外部对象。</p>
+</blockquote>
+<h3 id="可替换元素概念"><a href="#可替换元素概念" class="headerlink" title="可替换元素概念"></a>可替换元素概念</h3><pre>
+典型的可替换元素有 &lt;img>、 &lt;object>、 &lt;video> 和 表单元素，如&lt;textarea>、 &lt;input> 。 某些元素只在一些特殊情况下表现为可替换元素，例如 &lt;audio> 和 &lt;canvas> 。 通过 CSS content 属性来插入的对象 被称作 匿名可替换元素（anonymous replaced elements）。
+
+
+CSS在某些情况下会对可替换元素做特殊处理，比如计算外边距和一些auto值。
+
+
+需要注意的是，一部分（并非全部）可替换元素，本身具有尺寸和基线（baseline），会被像vertical-align之类的一些 CSS 属性用到。
+</pre>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/HTML/">HTML</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

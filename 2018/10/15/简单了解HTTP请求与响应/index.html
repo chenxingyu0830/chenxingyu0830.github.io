@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>简单了解HTTP请求与响应 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令\n\n\n简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令\n\nHTTP请求\n什么是HTTP请求？\n\nHTTP请求是指从客户端到服务器端的请求消息。包括：消息首行中，对资源的请求方法、资源的标识符及使用的协议。\n\nHTTP请求包括4部分\n1 动词 路径 协议/版本\n2 Key1: value1\n2 Key2: value2\n2 Key3: value3\n2 Content-Type: application/x-www-form-urlencoded\n2 Host: www.baidu.com\n2 User-Agent: curl/7.54.0\n3 \n4 要上传的数据\n\n1.请求最多包含四部分，最少包含三部分。（也就是说第四部分可以为空）\n2.第三部分永远都是一个回车（\\n）\n3.动词有 GET POST PUT PATCH DELETE HEAD OPTIONS 等\n4.这里的路径包括「查询参数」，但不包括「锚点」\n5.如果你没有写路径，那么路径默认为 /\n6.第 2 部分中的 Content-Type 标注了第 4 部分的格式\n\n\n如何用Chrome开发者工具查看 HTTP 请求内容首先要打开 Network地址栏输入网址在 Network 点击，查看 request，点击「view source」可以看到请求的前三部分了(第三部分只有换行所以不显示)如果有请求的第四部分，那么在 FormData 或 Payload 里面可以看到\n如果你想要知道POST请求内容的话，可以尝试网站的登录功能，因为登录时需要提交数据。注意:要点击 Perserve log ,防止页面刷新。\nHTTP响应\n什么是HTTP响应？\n\nHTTP响应是指来自服务器的响应。\n\nHTTP响应包括4部分\n1 协议/版本号 状态码 状态解释\n2 Key1: value1\n2 Key2: value2\n2 Content-Length: 17931\n2 Content-Type: text/html\n3\n4 要下载的内容\n\n第 2 部分中的 Content-Type 标注了第 4 部分的格式\n第 2 部分中的 Content-Type 遵循 MIME 规范\nHTTP状态码含义查询\n\n\n如何用Chrome开发者工具查看 HTTP 请求内容打开 Network输入网址选中第一个响应查看 Response Headers，点击「view parsed」你会看到响应的前两部分查看 Response 或者 Preview，你会看到响应的第 4 部分\n如何使用 curl 命令\n在Linux中curl是一个利用URL规则在命令行下工作的文件传输工具，可以说是一款很强大的http命令行工具。它支持文件的上传和下载，是综合传输工具，但按传统，习惯称url为下载工具\n\n例如 curl -s -v -H “xxx: yyy” – “ https://www.baidu.com “    -s，-silent  不显示进度表或错误消息    -v，-verbose  显示请求和响应    -H，-header&lt;header&gt;  添加一个响应头    –  “ https://www.baidu.com “   把你要响应的网址写在 “– ” 后\n","dateCreated":"2018-10-15T09:29:00+08:00","dateModified":"2018-10-24T15:38:22+08:00","datePublished":"2018-10-15T09:29:00+08:00","description":"简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令","headline":"简单了解HTTP请求与响应","image":["https://i.imgur.com/AgnV4Wz.png","https://i.imgur.com/4ly7hIj.gif"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/15/简单了解HTTP请求与响应/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/15/简单了解HTTP请求与响应/","keywords":"前端, HTTP","thumbnailUrl":"https://i.imgur.com/AgnV4Wz.png"}</script>
+    <meta name="description" content="简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令">
+<meta name="keywords" content="前端,HTTP">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="简单了解HTTP请求与响应">
+<meta property="og:url" content="/2018/10/15/简单了解HTTP请求与响应/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image1.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-2.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-3.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-4.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-5.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-6.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-7.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-8.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-2.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-3.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-9.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-10.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-11.png">
+<meta property="og:image" content="/2018/10/15/简单了解HTTP请求与响应/image-12.png">
+<meta property="og:updated_time" content="2018-10-24T07:38:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单了解HTTP请求与响应">
+<meta name="twitter:description" content="简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令">
+<meta name="twitter:image" content="/2018/10/15/简单了解HTTP请求与响应/image1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/AgnV4Wz.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/AgnV4Wz.png" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/4ly7hIj.gif"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/4ly7hIj.gif" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/4ly7hIj.gif');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            简单了解HTTP请求与响应
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP请求"><span class="toc-text">HTTP请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP请求包括4部分"><span class="toc-text">HTTP请求包括4部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何用Chrome开发者工具查看-HTTP-请求内容"><span class="toc-text">如何用Chrome开发者工具查看 HTTP 请求内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP响应"><span class="toc-text">HTTP响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP响应包括4部分"><span class="toc-text">HTTP响应包括4部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何用Chrome开发者工具查看-HTTP-请求内容-1"><span class="toc-text">如何用Chrome开发者工具查看 HTTP 请求内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用-curl-命令"><span class="toc-text">如何使用 curl 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例如-curl-s-v-H-“xxx-yyy”-–-“-https-www-baidu-com-“"><span class="toc-text">例如 curl -s -v -H “xxx: yyy” – “ https://www.baidu.com “</span></a></li></ol></li></ol>
+<blockquote>
+<p>简单介绍 HTTP 请求和响应是什么，如何用Chrome开发者工具查看 HTTP 请求和响应内容，以及如何使用 curl 命令</p>
+</blockquote>
+<h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><blockquote>
+<p>什么是HTTP请求？</p>
+</blockquote>
+<head><meta name="generator" content="Hexo 3.8.0"><br><strong>HTTP请求</strong>是指从客户端到服务器端的请求消息。包括：消息首行中，对资源的请求方法、资源的标识符及使用的协议。<br><img src="image1.png" alt=""><br></head>
+
+<h3 id="HTTP请求包括4部分"><a href="#HTTP请求包括4部分" class="headerlink" title="HTTP请求包括4部分"></a>HTTP请求包括4部分</h3><pre>
+1 动词 路径 协议/版本
+2 Key1: value1
+2 Key2: value2
+2 Key3: value3
+2 Content-Type: application/x-www-form-urlencoded
+2 Host: www.baidu.com
+2 User-Agent: curl/7.54.0
+3 
+4 要上传的数据
+
+1.请求最多包含四部分，最少包含三部分。（也就是说第四部分可以为空）
+2.第三部分永远都是一个回车（\n）
+3.动词有 GET POST PUT PATCH DELETE HEAD OPTIONS 等
+4.这里的路径包括「查询参数」，但不包括「锚点」
+5.如果你没有写路径，那么路径默认为 /
+6.第 2 部分中的 Content-Type 标注了第 4 部分的格式
+</pre>
+
+<h3 id="如何用Chrome开发者工具查看-HTTP-请求内容"><a href="#如何用Chrome开发者工具查看-HTTP-请求内容" class="headerlink" title="如何用Chrome开发者工具查看 HTTP 请求内容"></a>如何用Chrome开发者工具查看 HTTP 请求内容</h3><p>首先要打开 Network<br><img src="image-2.png" alt=""><br>地址栏输入网址<br><img src="image-3.png" alt=""><br>在 Network 点击，查看 request，点击「view source」<br><img src="image-4.png" alt=""><br><img src="image-5.png" alt=""><br>可以看到请求的前三部分了(第三部分只有换行所以不显示)<br><img src="image-6.png" alt=""><br>如果有请求的第四部分，那么在 FormData 或 Payload 里面可以看到</p>
+<p>如果你想要知道POST请求内容的话，可以尝试网站的登录功能，因为登录时需要提交数据。<br><img src="image-7.png" alt=""><br>注意:要点击 Perserve log ,防止页面刷新。<br><img src="image-8.png" alt=""><br></p>
+<h2 id="HTTP响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h2><blockquote>
+<p>什么是HTTP响应？</p>
+</blockquote>
+<head><meta name="generator" content="Hexo 3.8.0"><br><strong>HTTP响应</strong>是指来自服务器的响应。<br></head>
+
+<h3 id="HTTP响应包括4部分"><a href="#HTTP响应包括4部分" class="headerlink" title="HTTP响应包括4部分"></a>HTTP响应包括4部分</h3><pre>
+1 协议/版本号 状态码 状态解释
+2 Key1: value1
+2 Key2: value2
+2 Content-Length: 17931
+2 Content-Type: text/html
+3
+4 要下载的内容
+
+第 2 部分中的 Content-Type 标注了第 4 部分的格式
+第 2 部分中的 Content-Type 遵循 MIME 规范
+<a href="http://www.runoob.com/http/http-status-codes.html" target="_blank" rel="noopener">HTTP状态码含义查询</a>
+</pre>
+
+<h3 id="如何用Chrome开发者工具查看-HTTP-请求内容-1"><a href="#如何用Chrome开发者工具查看-HTTP-请求内容-1" class="headerlink" title="如何用Chrome开发者工具查看 HTTP 请求内容"></a>如何用Chrome开发者工具查看 HTTP 请求内容</h3><p>打开 Network<br><img src="image-2.png" alt=""><br>输入网址<br><img src="image-3.png" alt=""><br>选中第一个响应<br><img src="image-9.png" alt=""><br>查看 Response Headers，点击「view parsed」你会看到响应的前两部分<br><img src="image-10.png" alt=""><br>查看 Response 或者 Preview，你会看到响应的第 4 部分<br><img src="image-11.png" alt=""></p>
+<h2 id="如何使用-curl-命令"><a href="#如何使用-curl-命令" class="headerlink" title="如何使用 curl 命令"></a>如何使用 curl 命令</h2><blockquote>
+<p>在Linux中curl是一个利用URL规则在命令行下工作的文件传输工具，可以说是一款很强大的http命令行工具。它支持文件的上传和下载，是综合传输工具，但按传统，习惯称url为下载工具</p>
+</blockquote>
+<h3 id="例如-curl-s-v-H-“xxx-yyy”-–-“-https-www-baidu-com-“"><a href="#例如-curl-s-v-H-“xxx-yyy”-–-“-https-www-baidu-com-“" class="headerlink" title="例如 curl -s -v -H “xxx: yyy” – “ https://www.baidu.com “"></a>例如 curl -s -v -H “xxx: yyy” – “ <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> “</h3><p><pre><br>    -s，-silent  不显示进度表或错误消息<br>    -v，-verbose  显示请求和响应<br>    -H，-header&lt;header&gt;  添加一个响应头<br>    –  “ <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> “   把你要响应的网址写在 “– ” 后<br></pre><br><img src="image-12.png" alt=""></p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/HTTP/">HTTP</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>原型与原型链到底是什么？ - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。\n\n全局对象WindowECMAScript规定全局对象叫做global，而在浏览器中称全局对象为window（浏览器先存在）\nECMAScript规定有以下常用属性:\nparseInt\nparseFloat\nNumber()\nString()\nBoolean()\nObject()\n浏览器自己添加以下常用属性:\nalert            //弹框\npromit            //用户填写\nconfirm            //弹框确认\nconsole.log()    //开发者打印东西\ndocument        //文档，与DOM有关\nhistory            //浏览器下命令，与BOM有关\n\nwindow对象中的方法可以省略window，例如window.alert()方法可以写为alert()方法,比较简便。\n\n浏览器下添加的属性，在每个浏览器下效果可能会不一样，因为他们没有统一的标准。\n\n\n简单类型与对象的区别//声明简单的数据类型\nvar n1 = 1;\n//声明一个对象，可以用n2.toString()将其转换成字符串\nvar n2 = new Number(1);\n\n他们两者的存储方式不同。n1是简单声明的数据类型，直接存放在Stack内存中。n2是声明了一个对象，Stack内存中只存放它所指向的Heap内存地址，Heap内存中存放内容。\n\n声明对象除了存放内容，还存放了一些公共属性，如：toString()、valueOf()等。这些在我们接下来的文章中有提到。\n\nNumber对象\n\n\nNumber的常用属性\n含义\n\n\n\n\nNumber.valueOf()\n获取对象的值\n\n\nNumber.toString()\n转换为字符串\n\n\nNumber.toFixed()\n转换为小数\n\n\nNumber.toExponential()\n转换为科学计数法\n\n\n\nString对象\n\n\nString的常用属性\n含义\n\n\n\n\nString.charAt()\n获取数组中某一位置字符\n\n\nString.charCodeAt()\n获取数组中某一位置字符的Unicode编码\n\n\nString.trim()\n去空格\n\n\nString1.concat(String2)\n连接字符串\n\n\nString.slice(start,end)\n切片\n\n\nString.replace(‘e’,’o’)\n替换对应的字符\n\n\nString.indexOf()\n查询字符是否在字符串中\n\n\nString.split()\n分隔\n\n\nString.substr(start[, length])\n截取某一部分字符串\n\n\n\nBoolean对象var f1 = false\nvar f2 = new Boolean(false)\nif(f1) { console.log(&apos;1&apos;) } \nif(f2) { console.log(&apos;2&apos;) } \nf1 === f2                        //false    \n注意：f1并不等于f2，因为f2是一个对象。一切对象都是的布尔值都是true。只有6个falsy值：\n0  NaN  &apos;&apos;  null  undefined  false\nObject对象var obj1 = {};\nvar obj2 = {};\nobj1 === obj2; // false\nobj1不等于obj2的原因：\n因为它们存放的地址不同，所以两个对象是不相等的。\n\n原型(公共属性)什么是原型？\n所有对象都有 toString 和 valueOf 属性，那么我们是否需要给每个对象单独添加这些属性呢?答案是否定的，因为这么做将会占用大量的内存。\nJS解决的方法:\n设计一个隐藏的属性：__proto__ ，来存放公用属性，它的值就是公用属性的值，它指向存放公共属性的地址。当你用一个类型调用公用属性（如:toString）时，如果不是对象就包装成对象，做一个临时的转换。如果是对象的话，就看有没有想要调用的，对应的属性。如果有，就调用。如果没有，就去proto属性去查看有没有，有就去相应地址去调用对应属性。\n\nproto 与 prototype 区别我们创建一个对象时，创建的对象的__proto__属性会指向对应浏览器所创建的类型对象。这时我们就可以调用浏览器所创建的类型对象的共有属性。\n\n__proto__是对象共有属性的引用。目的是为了引用浏览器所创建的类型对象的共有属性。 \nprototype是浏览器所创建的，本身就存在。和__proto__用法上没有区别，只是形式上有区别。prototype是浏览器亲爹生的，__proto__是用户创建的对象产生的。prototype存在的意义是为了防止对象的共有属性没有被调用而被垃圾回收，导致浏览器的崩溃。\n\n\n对象调用原型的流程另外还有一些单独类别才有的公共属性，如number类型有toFixed属性，而string类型没有该属性。那么怎么把每个类型的公共属性区分开呢？\n将每个类别共有的放在一起，独有的属性分别赋予类别？答案是将其类型先指向number共有属性（它独有的属性），number共有属性再添加proto属性，地址再指向公共属性。拿number类型的tofixed()和valueOf()属性为例:\n\n他先从对象的属性里找，找不到。\n再去number共有属性里的proto属性里找，这时候找到tofixed()属性，返回。\n找不到valueOf()属性，再去Object公共属性里找。这样总共3个步骤。\n\n\n总结:\n\n每个类型共有属性（String共有属性，Number共有属性，Boolean共有属性）都有属于自己独特的属性。\n变量的属性先调用自己类型的共有属性，如果找不到，通过__proto__属性指向的地址，调用object共有属性。\n普通对象直接调用object共有属性。\nobject共有属性里没有__proto__属性。\n\n原型链概念:   \n每个实例对象object都有一个私有属性（称之为__proto__）指向它的原型对象prototype。该原型对象也有一个自己的原型对象__proto__ ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。\n简单来说，原型链就是对象一直指向它的原型对象，直到原型对象为null。就像一条链子，每个共有属性都是链子上的节点。\n也可以这么理解，变量的__proto__私有属性指向的就是它的原型对象prototype\n如: number.__proto__.__proto__ === Object。prototype\n\n变量在调用属性的时候，会通过原型链一层层找原型对象里的对应属性，如果找不到则undefined。\n其实原型链就用到了数据结构里的树。私有属性__proto__指向对应树的节点。\n\n在没有写任何代码的情况下，浏览器初始化原型对象。\nString.prototype是 String 的公用属性。   s.__proto__是String的公用属性的引用。\nprototype为了防止垃圾回收，__proto__为了引用属性。\n一些烧脑的等式通过var 对象 = new 函数；推出其他烧脑的等式\nvar n = new Number(1)\n//var 对象 = new 函数\n\n//对象的__proto__指向某对象的共用属性，构造某对象的函数的prototype也指向某对象的共用属性\n//__proto__ 是对象的属性，prototype是函数的属性\n对象.__proto__ === 函数.prototype\n\n//函数的prototype是对象，这个对象对应的就是最简单的函数Object\n函数.prototype.__proto__ === Object.prototype\n\n//由于函数本身即是函数（最优先被视为函数），也是对象，而函数的构造函数是Function\n函数.__proto__ === Function.prototype\n\n//Function即是对象，也是函数，但他优先是个函数\nFunction.__proto__ === Function.prototype\n\n//Function.prototype也是对象，是普通的对象，所以其对应的函数是Object\nFunciton.prototype.__proto__=== Object.prototype\n通过推导，我们可以知道Function即是函数，也是对象。Function.prototype 与Funciton.__proto__互相引用。\n所以得出结论,Function是Object的构造函数。\nObject.__proto__ === Function.prototype，\n参考资料https://www.jianshu.com/p/dffeae0f1316\nby 《你真的完全理解原型与原型链？》—— 区家乐\n","dateCreated":"2018-11-10T15:23:05+08:00","dateModified":"2018-11-10T17:05:02+08:00","datePublished":"2018-11-10T15:23:05+08:00","description":"可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。","headline":"原型与原型链到底是什么？","image":["https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg","https://i.loli.net/2018/11/10/5be68ad84026f.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/11/10/原型与原型链到底是什么？/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/11/10/原型与原型链到底是什么？/","keywords":"前端, JavaScript","thumbnailUrl":"https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"}</script>
+    <meta name="description" content="可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。">
+<meta name="keywords" content="前端,JavaScript">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="原型与原型链到底是什么？">
+<meta property="og:url" content="/2018/11/10/原型与原型链到底是什么？/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be691206f545.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be695e3e1063.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be69752ef827.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be698babf62b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be69c0f1ddf0.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be69c7d92b14.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/10/5be69cba7c659.jpg">
+<meta property="og:updated_time" content="2018-11-10T09:05:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原型与原型链到底是什么？">
+<meta name="twitter:description" content="可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。">
+<meta name="twitter:image" content="https://i.loli.net/2018/11/10/5be691206f545.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/10/5be68ad84026f.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/10/5be68ad84026f.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.loli.net/2018/11/10/5be68ad84026f.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            原型与原型链到底是什么？
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>可能你听说过原型和原型链，但是MDN的解释对于初学者来讲又很难理解。下面我介绍一下自己的理解，可能有失偏颇，敬请谅解。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局对象Window"><span class="toc-text">全局对象Window</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单类型与对象的区别"><span class="toc-text">简单类型与对象的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Number对象"><span class="toc-text">Number对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String对象"><span class="toc-text">String对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean对象"><span class="toc-text">Boolean对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object对象"><span class="toc-text">Object对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型-公共属性"><span class="toc-text">原型(公共属性)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#proto-与-prototype-区别"><span class="toc-text">proto 与 prototype 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象调用原型的流程"><span class="toc-text">对象调用原型的流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些烧脑的等式"><span class="toc-text">一些烧脑的等式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+<h2 id="全局对象Window"><a href="#全局对象Window" class="headerlink" title="全局对象Window"></a>全局对象Window</h2><p>ECMAScript规定全局对象叫做global，而在浏览器中称全局对象为window（浏览器先存在）</p>
+<p>ECMAScript规定有以下常用属性:</p>
+<pre><code>parseInt
+parseFloat
+Number()
+String()
+Boolean()
+Object()
+</code></pre><p>浏览器自己添加以下常用属性:</p>
+<pre><code>alert            //弹框
+promit            //用户填写
+confirm            //弹框确认
+console.log()    //开发者打印东西
+document        //文档，与DOM有关
+history            //浏览器下命令，与BOM有关
+</code></pre><ul>
+<li><p>window对象中的方法可以省略window，例如window.alert()方法可以写为alert()方法,比较简便。</p>
+</li>
+<li><p>浏览器下添加的属性，在每个浏览器下效果可能会不一样，因为他们没有统一的标准。</p>
+</li>
+</ul>
+<h2 id="简单类型与对象的区别"><a href="#简单类型与对象的区别" class="headerlink" title="简单类型与对象的区别"></a>简单类型与对象的区别</h2><pre><code>//声明简单的数据类型
+var n1 = 1;
+//声明一个对象，可以用n2.toString()将其转换成字符串
+var n2 = new Number(1);
+</code></pre><p><img src="https://i.loli.net/2018/11/10/5be691206f545.jpg" alt="简单类型与对象"></p>
+<p>他们两者的存储方式不同。n1是简单声明的数据类型，直接存放在Stack内存中。n2是声明了一个对象，Stack内存中只存放它所指向的Heap内存地址，Heap内存中存放内容。</p>
+<ul>
+<li>声明对象除了存放内容，还存放了一些公共属性，如：toString()、valueOf()等。这些在我们接下来的文章中有提到。</li>
+</ul>
+<h3 id="Number对象"><a href="#Number对象" class="headerlink" title="Number对象"></a>Number对象</h3><table>
+<thead>
+<tr>
+<th>Number的常用属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number.valueOf()</td>
+<td>获取对象的值</td>
+</tr>
+<tr>
+<td>Number.toString()</td>
+<td>转换为字符串</td>
+</tr>
+<tr>
+<td>Number.toFixed()</td>
+<td>转换为小数</td>
+</tr>
+<tr>
+<td>Number.toExponential()</td>
+<td>转换为科学计数法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="String对象"><a href="#String对象" class="headerlink" title="String对象"></a>String对象</h3><table>
+<thead>
+<tr>
+<th>String的常用属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String.charAt()</td>
+<td>获取数组中某一位置字符</td>
+</tr>
+<tr>
+<td>String.charCodeAt()</td>
+<td>获取数组中某一位置字符的Unicode编码</td>
+</tr>
+<tr>
+<td>String.trim()</td>
+<td>去空格</td>
+</tr>
+<tr>
+<td>String1.concat(String2)</td>
+<td>连接字符串</td>
+</tr>
+<tr>
+<td>String.slice(start,end)</td>
+<td>切片</td>
+</tr>
+<tr>
+<td>String.replace(‘e’,’o’)</td>
+<td>替换对应的字符</td>
+</tr>
+<tr>
+<td>String.indexOf()</td>
+<td>查询字符是否在字符串中</td>
+</tr>
+<tr>
+<td>String.split()</td>
+<td>分隔</td>
+</tr>
+<tr>
+<td>String.substr(start[, length])</td>
+<td>截取某一部分字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Boolean对象"><a href="#Boolean对象" class="headerlink" title="Boolean对象"></a>Boolean对象</h3><pre><code>var f1 = false
+var f2 = new Boolean(false)
+if(f1) { console.log(&apos;1&apos;) } 
+if(f2) { console.log(&apos;2&apos;) } 
+f1 === f2                        //false    
+</code></pre><p>注意：f1并不等于f2，因为f2是一个对象。一切对象都是的布尔值都是true。只有6个falsy值：</p>
+<pre><code>0  NaN  &apos;&apos;  null  undefined  false
+</code></pre><h3 id="Object对象"><a href="#Object对象" class="headerlink" title="Object对象"></a>Object对象</h3><pre><code>var obj1 = {};
+var obj2 = {};
+obj1 === obj2; // false
+</code></pre><p>obj1不等于obj2的原因：</p>
+<p>因为它们存放的地址不同，所以两个对象是不相等的。</p>
+<p><img src="https://i.loli.net/2018/11/10/5be695e3e1063.jpg" alt=""></p>
+<h2 id="原型-公共属性"><a href="#原型-公共属性" class="headerlink" title="原型(公共属性)"></a>原型(公共属性)</h2><p>什么是原型？</p>
+<p>所有对象都有 <code>toString</code> 和 <code>valueOf</code> 属性，那么我们是否需要给每个对象单独添加这些属性呢?答案是否定的，因为这么做将会占用大量的内存。</p>
+<p>JS解决的方法:</p>
+<p>设计一个隐藏的属性：<code>__proto__</code> ，来存放公用属性，它的值就是公用属性的值，它指向存放公共属性的地址。当你用一个类型调用公用属性（如:toString）时，如果不是对象就包装成对象，做一个临时的转换。如果是对象的话，就看有没有想要调用的，对应的属性。如果有，就调用。如果没有，就去<strong>proto</strong>属性去查看有没有，有就去相应地址去调用对应属性。</p>
+<p><img src="https://i.loli.net/2018/11/10/5be69752ef827.jpg" alt=""></p>
+<h3 id="proto-与-prototype-区别"><a href="#proto-与-prototype-区别" class="headerlink" title="proto 与 prototype 区别"></a><strong>proto</strong> 与 prototype 区别</h3><p>我们创建一个对象时，创建的对象的<code>__proto__</code>属性会指向对应<code>浏览器所创建的类型对象</code>。这时我们就可以调用<code>浏览器所创建的类型对象</code>的共有属性。</p>
+<ul>
+<li><code>__proto__</code>是对象共有属性的引用。目的是为了引用<code>浏览器所创建的类型对象</code>的共有属性。 </li>
+<li><code>prototype</code>是浏览器所创建的，本身就存在。和<code>__proto__</code>用法上没有区别，只是形式上有区别。<code>prototype</code>是浏览器亲爹生的，<code>__proto__</code>是用户创建的对象产生的。<code>prototype</code>存在的意义是为了防止对象的共有属性没有被调用而被垃圾回收，导致浏览器的崩溃。</li>
+</ul>
+<p><img src="https://i.loli.net/2018/11/10/5be698babf62b.jpg" alt=""></p>
+<h3 id="对象调用原型的流程"><a href="#对象调用原型的流程" class="headerlink" title="对象调用原型的流程"></a>对象调用原型的流程</h3><p>另外还有一些单独类别才有的公共属性，如number类型有toFixed属性，而string类型没有该属性。那么怎么把每个类型的公共属性区分开呢？</p>
+<p>将每个类别共有的放在一起，独有的属性分别赋予类别？答案是将其类型先指向number共有属性（它独有的属性），number共有属性再添加<strong>proto</strong>属性，地址再指向公共属性。拿number类型的tofixed()和valueOf()属性为例:</p>
+<ol>
+<li>他先从对象的属性里找，找不到。</li>
+<li>再去number共有属性里的<strong>proto</strong>属性里找，这时候找到tofixed()属性，返回。</li>
+<li>找不到valueOf()属性，再去Object公共属性里找。这样总共3个步骤。</li>
+</ol>
+<p><img src="https://i.loli.net/2018/11/10/5be69c0f1ddf0.jpg" alt="对象调用原型的流程"></p>
+<p>总结:</p>
+<ol>
+<li>每个类型共有属性（String共有属性，Number共有属性，Boolean共有属性）都有属于自己独特的属性。</li>
+<li>变量的属性先调用自己类型的共有属性，如果找不到，通过<code>__proto__</code>属性指向的地址，调用object共有属性。</li>
+<li>普通对象直接调用object共有属性。</li>
+<li>object共有属性里没有<code>__proto__</code>属性。</li>
+</ol>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>概念:   </p>
+<p>每个实例对象<code>object</code>都有一个私有属性（称之为<code>__proto__</code>）指向它的原型对象<code>prototype</code>。该原型对象也有一个自己的原型对象<code>__proto__</code> ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。</p>
+<p>简单来说，原型链就是对象一直指向它的原型对象，直到原型对象为null。就像一条链子，每个共有属性都是链子上的节点。</p>
+<p>也可以这么理解，变量的<code>__proto__</code>私有属性指向的就是它的原型对象<code>prototype</code></p>
+<p>如: <code>number.__proto__.__proto__ === Object。prototype</code></p>
+<p><img src="https://i.loli.net/2018/11/10/5be69c7d92b14.jpg" alt=""></p>
+<p>变量在调用属性的时候，会通过原型链一层层找原型对象里的对应属性，如果找不到则undefined。</p>
+<p>其实原型链就用到了数据结构里的树。私有属性<code>__proto__</code>指向对应树的节点。</p>
+<p><img src="https://i.loli.net/2018/11/10/5be69cba7c659.jpg" alt=""></p>
+<p>在没有写任何代码的情况下，浏览器初始化原型对象。</p>
+<p>String.prototype是 String 的公用属性。   <code>s.__proto__</code>是String的公用属性的引用。</p>
+<p>prototype为了防止垃圾回收，<code>__proto__</code>为了引用属性。</p>
+<h2 id="一些烧脑的等式"><a href="#一些烧脑的等式" class="headerlink" title="一些烧脑的等式"></a>一些烧脑的等式</h2><p>通过var 对象 = new 函数；推出其他烧脑的等式</p>
+<pre><code>var n = new Number(1)
+//var 对象 = new 函数
+
+//对象的__proto__指向某对象的共用属性，构造某对象的函数的prototype也指向某对象的共用属性
+//__proto__ 是对象的属性，prototype是函数的属性
+对象.__proto__ === 函数.prototype
+
+//函数的prototype是对象，这个对象对应的就是最简单的函数Object
+函数.prototype.__proto__ === Object.prototype
+
+//由于函数本身即是函数（最优先被视为函数），也是对象，而函数的构造函数是Function
+函数.__proto__ === Function.prototype
+
+//Function即是对象，也是函数，但他优先是个函数
+Function.__proto__ === Function.prototype
+
+//Function.prototype也是对象，是普通的对象，所以其对应的函数是Object
+Funciton.prototype.__proto__=== Object.prototype
+</code></pre><p>通过推导，我们可以知道Function即是函数，也是对象。<code>Function.prototype</code> 与<code>Funciton.__proto__</code>互相引用。</p>
+<p>所以得出结论,Function是Object的构造函数。</p>
+<p><code>Object.__proto__ === Function.prototype</code>，</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.jianshu.com/p/dffeae0f1316" target="_blank" rel="noopener">https://www.jianshu.com/p/dffeae0f1316</a></p>
+<p>by 《你真的完全理解原型与原型链？》—— 区家乐</p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/JavaScript/">JavaScript</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

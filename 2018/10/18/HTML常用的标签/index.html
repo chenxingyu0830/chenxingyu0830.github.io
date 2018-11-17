@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>HTML常用的标签 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"HTML常用的标签简单了解\n\nhtml标签根元素\n\n\nElement\nDescription\n\n\n\n\n&lt;html&gt;\n代表 HTML 或 XHTML 文档的根。其他所有元素必须是这个元素的子节点\n\n\n\n文档数据\n\n\nElement\nDescription\n\n\n\n\n&lt;head&gt;\n代表关于文档元数据的一个集合，包括脚本或样式表的链接或内容\n\n\n&lt;title&gt;\n定义文档的标题\n\n\n&lt;base&gt;\n定义页面上相对URL的基准URL\n\n\n&lt;link&gt;\n用于链接外部的CSS到该文档\n\n\n&lt;meta&gt;\n定义其他HTML元素无法描述的数据\n\n\n&lt;style&gt;\n用于内联CSS\n\n\n\n脚本\n\n\nElement\nDescription\n\n\n\n\n&lt;script&gt;\n定义一个内联脚本或链接到外部脚本。脚本语言是 JavaScript\n\n\n&lt;noscript&gt;\n定义当浏览器不支持脚本时显示的替代文字\n\n\n&lt;template&gt;\n通过 JavaScript 在运行时实例化内容的容器\n\n\n\n章节\n\n\nElement\nDescription\n\n\n\n\n&lt;body&gt;\n代表 HTML 文档的内容。在文档中只能有一个 &lt;body&gt; 元素\n\n\n&lt;section&gt;\n定义文档中的一个章节\n\n\n&lt;nav&gt;\n定义只包含导航链接的章节\n\n\n&lt;article&gt;\n定义可以独立于内容其余部分的完整独立内容块\n\n\n&lt;aside&gt;\n定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理\n\n\n&lt;h1&gt;到&lt;h6&gt;\n标题元素实现了六层文档标题，&lt;h1&gt; 是最大的标题，&lt;h6&gt; 是最小的标题。标题元素简要地描述章节的主题\n\n\n&lt;header&gt;\n定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录\n\n\n&lt;footer&gt;\n定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址\n\n\n&lt;address&gt;\n定义包含联系信息的一个章节\n\n\n&lt;main&gt;\n定义文档中主要或重要的内容\n\n\n\n组织内容\n\n\nElement\nDescription\n\n\n\n\n&lt;p&gt;\n定义一个段落\n\n\n&lt;hr&gt;\n分隔符\n\n\n&lt;pre&gt;\n代表其内容以及预先排版过，格式应当保留\n\n\n&lt;blockquote&gt;\n代表引用自其它来源的内容\n\n\n&lt;ol&gt;\n定义一个有序列表\n\n\n&lt;ul&gt;\n定义一个无序列表\n\n\n&lt;li&gt;\n定义列表中的一个列表项\n\n\n&lt;dl&gt;\n定义一个定义列表\n\n\n&lt;dt&gt;\n代表一个由下一个&lt;dd&gt;定义的术语\n\n\n&lt;dd&gt;\n代表出现在它之前之前术语的定义\n\n\n&lt;figure&gt;\n代表一个和文档有关的图例\n\n\n&lt;figcaption&gt;\n代表一个图例的说明\n\n\n&lt;div&gt;\n代表一个通用的容器，没有特殊含义\n\n\n\n文字形式\n\n\nElement\nDescription\n\n\n\n\n&lt;a&gt;\n代表一个链接到其他资源的超链接\n\n\n&lt;em&gt;\n代表强调 文字\n\n\n&lt;strong&gt;\n代表特别重要 文字\n\n\n&lt;small&gt;\n代表注释，如免责声明、版权声明等，对理解文档不重要\n\n\n&lt;s&gt;\n代表不准确或不相关 的内容\n\n\n&lt;cite&gt;\n代表作品标题\n\n\n&lt;q&gt;\n代表内联的引用\n\n\n&lt;dfn&gt;\n代表一个术语包含在其最近祖先内容中的定义\n\n\n&lt;abbr&gt;\n代表省略 或缩写 ，其完整内容在 title 属性中\n\n\n&lt;data&gt;\n关联一个内容的机器可读的等价形式\n\n\n&lt;time&gt;\n代表日期 和时间 值\n\n\n&lt;code&gt;\n代表计算机代码\n\n\n&lt;var&gt;\n代表代码中的变量\n\n\n&lt;sub&gt;,&lt;sup&gt;\n分别代表下标 和上标\n\n\n&lt;u&gt;\n代表一段需要下划线呈现的文本注释，如标记出拼写错误的文字等\n\n\n&lt;mark&gt;\n代表一段需要被高亮的引用 文字\n\n\n&lt;ruby&gt;\n代表被ruby 注释 标记的文本，如中文汉字和它的拼音\n\n\n&lt;rt&gt;\n代表ruby 注释 ，如中文拼音\n\n\n&lt;rp&gt;\n代表 ruby 注释两边的额外插入文本 ，用于在不支持 ruby 注释显示的浏览器中提供友好的注释显示\n\n\n&lt;bdi&gt;\n代表需要脱离 父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本\n\n\n&lt;span&gt;\n代表一段没有特殊含义的文本，当其他语义元素都不适合文本时候可以使用该元素\n\n\n&lt;br&gt;\n代表换行\n\n\n&lt;wbr&gt;\n代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符\n\n\n\n编辑\n\n\nElement\nDescription\n\n\n\n\n&lt;ins&gt;\n定义增加 到文档的内容\n\n\n&lt;del&gt;\n定义从文档移除 的内容\n\n\n\n嵌入内容\n\n\nElement\nDescription\n\n\n\n\n&lt;img&gt;\n代表一张图片\n\n\n&lt;iframe&gt;\n代表一个内联的框架\n\n\n&lt;embed&gt;\n代表一个嵌入 的外部资源，如应用程序或交互内容\n\n\n&lt;object&gt;\n代表一个外部资源 ，如图片、HTML 子文档、插件等\n\n\n&lt;video&gt;\n代表一段视频 及其视频文件和字幕，并提供了播放视频的用户界面\n\n\n&lt;audio&gt;\n代表一段声音 ，或音频流\n\n\n&lt;source&gt;\n为 &lt;video&gt; 或 &lt;audio&gt; 这类媒体元素指定媒体源\n\n\n&lt;track&gt;\n为 &lt;video&gt; 或 &lt;audio&gt; 这类媒体元素指定文本轨道（字幕）\n\n\n&lt;canvas&gt;\n代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等\n\n\n&lt;map&gt;\n与 &lt;area&gt; 元素共同定义图像映射 区域\n\n\n&lt;area&gt;\n与 &lt;map&gt; 元素共同定义图像映射 区域\n\n\n&lt;svg&gt;\n定义一个嵌入式矢量图\n\n\n&lt;math&gt;\n定义一段数学公式\n\n\n\n表格\n\n\nElement\nDescription\n\n\n\n\n&lt;table&gt;\n定义多维数据\n\n\n&lt;caption&gt;\n代表表格的标题\n\n\n&lt;colgroup&gt;代表表格中一组单列或多列\n\n\n&lt;col&gt;\n代表表格中的列\n\n\n&lt;tbody&gt;\n代表表格中一块具体数据 （表格主体）\n\n\n&lt;thead&gt;\n代表表格中一块列标签 （表头）\n\n\n&lt;tfoot&gt;\n代表表格中一块列摘要 （表尾）\n\n\n&lt;tr&gt;\n代表表格中的行\n\n\n&lt;td&gt;\n代表表格中的单元格\n\n\n&lt;th&gt;\n代表表格中的头部单元格\n\n\n\n表单\n\n\nElement\nDescription\n\n\n\n\n&lt;form&gt;\n代表一个表单 ，由控件组成\n\n\n&lt;fieldset&gt;\n代表控件组\n\n\n&lt;legend&gt;\n代表 &lt;fieldset&gt; 控件组的标题\n\n\n&lt;label&gt;\n代表表单控件的标题\n\n\n&lt;input&gt;\n代表允许用户编辑数据的数据区 （文本框、单选框、复选框等）\n\n\n&lt;button&gt;\n代表按钮\n\n\n&lt;select&gt;\n代表下拉框\n\n\n&lt;datalist&gt;\n这个元素在 HTML5 中加入 代表提供给其他控件的一组预定义选项\n\n\n&lt;optgroup&gt;\n代表一个选项分组\n\n\n&lt;option&gt;\n代表一个 &lt;select&gt; 元素或 &lt;datalist&gt; 元素中的一个选项\n\n\n&lt;textarea&gt;\n代表多行文本框\n\n\n&lt;keygen&gt;\n这个元素在 HTML5 中加入    代表一个密钥对生成器 控件\n\n\n&lt;output&gt;\n这个元素在 HTML5 中加入    代表计算值\n\n\n&lt;progress&gt;\n这个元素在 HTML5 中加入 代表进度条\n\n\n&lt;meter&gt;\n这个元素在 HTML5 中加入    代表滑动条\n\n\n\n交互元素\n\n\nElement\nDescription\n\n\n\n\n&lt;details&gt;\n这个元素在 HTML5 中加入    代表一个用户可以(点击)获取额外信息或控件的小部件\n\n\n&lt;summary&gt;\n这个元素在 HTML5 中加入    代表 &lt;details&gt; 元素的综述 或标题\n\n\n&lt;menuitem&gt;\n这个元素在 HTML5 中加入 代表一个用户可以点击的菜单项\n\n\n&lt;menu&gt;\n这个元素在 HTML5 中加入 代表菜单\n\n\n\n","dateCreated":"2018-10-18T18:45:06+08:00","dateModified":"2018-10-24T15:41:10+08:00","datePublished":"2018-10-18T18:45:06+08:00","description":"HTML常用的标签简单了解","headline":"HTML常用的标签","image":["https://i.imgur.com/y2IlCMj.png","https://i.imgur.com/QbCVDxq.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/18/HTML常用的标签/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/18/HTML常用的标签/","keywords":"前端, HTML","thumbnailUrl":"https://i.imgur.com/y2IlCMj.png"}</script>
+    <meta name="description" content="HTML常用的标签简单了解">
+<meta name="keywords" content="前端,HTML">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="HTML常用的标签">
+<meta property="og:url" content="/2018/10/18/HTML常用的标签/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HTML常用的标签简单了解">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-24T07:41:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML常用的标签">
+<meta name="twitter:description" content="HTML常用的标签简单了解">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/y2IlCMj.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/y2IlCMj.png" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/QbCVDxq.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/QbCVDxq.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/QbCVDxq.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            HTML常用的标签
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>HTML常用的标签简单了解<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#html标签"><span class="toc-text">html标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#根元素"><span class="toc-text">根元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档数据"><span class="toc-text">文档数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本"><span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#章节"><span class="toc-text">章节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组织内容"><span class="toc-text">组织内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文字形式"><span class="toc-text">文字形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑"><span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌入内容"><span class="toc-text">嵌入内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表格"><span class="toc-text">表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表单"><span class="toc-text">表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互元素"><span class="toc-text">交互元素</span></a></li></ol></li></ol>
+<h2 id="html标签"><a href="#html标签" class="headerlink" title="html标签"></a>html标签</h2><h3 id="根元素"><a href="#根元素" class="headerlink" title="根元素"></a>根元素</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;html&gt;</td>
+<td style="text-align:center">代表 HTML 或 XHTML 文档的根。其他所有元素必须是这个元素的子节点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文档数据"><a href="#文档数据" class="headerlink" title="文档数据"></a>文档数据</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;head&gt;</td>
+<td style="text-align:center">代表关于文档元数据的一个集合，包括脚本或样式表的链接或内容</td>
+</tr>
+<tr>
+<td>&lt;title&gt;</td>
+<td style="text-align:center">定义文档的标题</td>
+</tr>
+<tr>
+<td>&lt;base&gt;</td>
+<td style="text-align:center">定义页面上相对URL的基准URL</td>
+</tr>
+<tr>
+<td>&lt;link&gt;</td>
+<td style="text-align:center">用于链接外部的CSS到该文档</td>
+</tr>
+<tr>
+<td>&lt;meta&gt;</td>
+<td style="text-align:center">定义其他HTML元素无法描述的数据</td>
+</tr>
+<tr>
+<td>&lt;style&gt;</td>
+<td style="text-align:center">用于内联CSS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;script&gt;</td>
+<td style="text-align:center">定义一个内联脚本或链接到外部脚本。脚本语言是 JavaScript</td>
+</tr>
+<tr>
+<td>&lt;noscript&gt;</td>
+<td style="text-align:center">定义当浏览器不支持脚本时显示的替代文字</td>
+</tr>
+<tr>
+<td>&lt;template&gt;</td>
+<td style="text-align:center">通过 JavaScript 在运行时实例化内容的容器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="章节"><a href="#章节" class="headerlink" title="章节"></a>章节</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;body&gt;</td>
+<td style="text-align:center">代表 HTML 文档的内容。在文档中只能有一个 &lt;body&gt; 元素</td>
+</tr>
+<tr>
+<td>&lt;section&gt;</td>
+<td style="text-align:center">定义文档中的一个章节</td>
+</tr>
+<tr>
+<td>&lt;nav&gt;</td>
+<td style="text-align:center">定义只包含导航链接的章节</td>
+</tr>
+<tr>
+<td>&lt;article&gt;</td>
+<td style="text-align:center">定义可以独立于内容其余部分的完整独立内容块</td>
+</tr>
+<tr>
+<td>&lt;aside&gt;</td>
+<td style="text-align:center">定义和页面内容关联度较低的内容——如果被删除，剩下的内容仍然很合理</td>
+</tr>
+<tr>
+<td>&lt;h1&gt;到&lt;h6&gt;</td>
+<td style="text-align:center">标题元素实现了六层文档标题，&lt;h1&gt; 是最大的标题，&lt;h6&gt; 是最小的标题。标题元素简要地描述章节的主题</td>
+</tr>
+<tr>
+<td>&lt;header&gt;</td>
+<td style="text-align:center">定义页面或章节的头部。它经常包含 logo、页面标题和导航性的目录</td>
+</tr>
+<tr>
+<td>&lt;footer&gt;</td>
+<td style="text-align:center">定义页面或章节的尾部。它经常包含版权信息、法律信息链接和反馈建议用的地址</td>
+</tr>
+<tr>
+<td>&lt;address&gt;</td>
+<td style="text-align:center">定义包含联系信息的一个章节</td>
+</tr>
+<tr>
+<td>&lt;main&gt;</td>
+<td style="text-align:center">定义文档中主要或重要的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="组织内容"><a href="#组织内容" class="headerlink" title="组织内容"></a>组织内容</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;p&gt;</td>
+<td style="text-align:center">定义一个段落</td>
+</tr>
+<tr>
+<td>&lt;hr&gt;</td>
+<td style="text-align:center">分隔符</td>
+</tr>
+<tr>
+<td>&lt;pre&gt;</td>
+<td style="text-align:center">代表其内容以及预先排版过，格式应当保留</td>
+</tr>
+<tr>
+<td>&lt;blockquote&gt;</td>
+<td style="text-align:center">代表引用自其它来源的内容</td>
+</tr>
+<tr>
+<td>&lt;ol&gt;</td>
+<td style="text-align:center">定义一个有序列表</td>
+</tr>
+<tr>
+<td>&lt;ul&gt;</td>
+<td style="text-align:center">定义一个无序列表</td>
+</tr>
+<tr>
+<td>&lt;li&gt;</td>
+<td style="text-align:center">定义列表中的一个列表项</td>
+</tr>
+<tr>
+<td>&lt;dl&gt;</td>
+<td style="text-align:center">定义一个定义列表</td>
+</tr>
+<tr>
+<td>&lt;dt&gt;</td>
+<td style="text-align:center">代表一个由下一个&lt;dd&gt;定义的术语</td>
+</tr>
+<tr>
+<td>&lt;dd&gt;</td>
+<td style="text-align:center">代表出现在它之前之前术语的定义</td>
+</tr>
+<tr>
+<td>&lt;figure&gt;</td>
+<td style="text-align:center">代表一个和文档有关的图例</td>
+</tr>
+<tr>
+<td>&lt;figcaption&gt;</td>
+<td style="text-align:center">代表一个图例的说明</td>
+</tr>
+<tr>
+<td>&lt;div&gt;</td>
+<td style="text-align:center">代表一个通用的容器，没有特殊含义</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文字形式"><a href="#文字形式" class="headerlink" title="文字形式"></a>文字形式</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;a&gt;</td>
+<td style="text-align:center">代表一个链接到其他资源的超链接</td>
+</tr>
+<tr>
+<td>&lt;em&gt;</td>
+<td style="text-align:center">代表强调 文字</td>
+</tr>
+<tr>
+<td>&lt;strong&gt;</td>
+<td style="text-align:center">代表特别重要 文字</td>
+</tr>
+<tr>
+<td>&lt;small&gt;</td>
+<td style="text-align:center">代表注释，如免责声明、版权声明等，对理解文档不重要</td>
+</tr>
+<tr>
+<td>&lt;s&gt;</td>
+<td style="text-align:center">代表不准确或不相关 的内容</td>
+</tr>
+<tr>
+<td>&lt;cite&gt;</td>
+<td style="text-align:center">代表作品标题</td>
+</tr>
+<tr>
+<td>&lt;q&gt;</td>
+<td style="text-align:center">代表内联的引用</td>
+</tr>
+<tr>
+<td>&lt;dfn&gt;</td>
+<td style="text-align:center">代表一个术语包含在其最近祖先内容中的定义</td>
+</tr>
+<tr>
+<td>&lt;abbr&gt;</td>
+<td style="text-align:center">代表省略 或缩写 ，其完整内容在 title 属性中</td>
+</tr>
+<tr>
+<td>&lt;data&gt;</td>
+<td style="text-align:center">关联一个内容的机器可读的等价形式</td>
+</tr>
+<tr>
+<td>&lt;time&gt;</td>
+<td style="text-align:center">代表日期 和时间 值</td>
+</tr>
+<tr>
+<td>&lt;code&gt;</td>
+<td style="text-align:center">代表计算机代码</td>
+</tr>
+<tr>
+<td>&lt;var&gt;</td>
+<td style="text-align:center">代表代码中的变量</td>
+</tr>
+<tr>
+<td>&lt;sub&gt;,&lt;sup&gt;</td>
+<td style="text-align:center">分别代表下标 和上标</td>
+</tr>
+<tr>
+<td>&lt;u&gt;</td>
+<td style="text-align:center">代表一段需要下划线呈现的文本注释，如标记出拼写错误的文字等</td>
+</tr>
+<tr>
+<td>&lt;mark&gt;</td>
+<td style="text-align:center">代表一段需要被高亮的引用 文字</td>
+</tr>
+<tr>
+<td>&lt;ruby&gt;</td>
+<td style="text-align:center">代表被ruby 注释 标记的文本，如中文汉字和它的拼音</td>
+</tr>
+<tr>
+<td>&lt;rt&gt;</td>
+<td style="text-align:center">代表ruby 注释 ，如中文拼音</td>
+</tr>
+<tr>
+<td>&lt;rp&gt;</td>
+<td style="text-align:center">代表 ruby 注释两边的额外插入文本 ，用于在不支持 ruby 注释显示的浏览器中提供友好的注释显示</td>
+</tr>
+<tr>
+<td>&lt;bdi&gt;</td>
+<td style="text-align:center">代表需要脱离 父元素文本方向的一段文本。它允许嵌入一段不同或未知文本方向格式的文本</td>
+</tr>
+<tr>
+<td>&lt;span&gt;</td>
+<td style="text-align:center">代表一段没有特殊含义的文本，当其他语义元素都不适合文本时候可以使用该元素</td>
+</tr>
+<tr>
+<td>&lt;br&gt;</td>
+<td style="text-align:center">代表换行</td>
+</tr>
+<tr>
+<td>&lt;wbr&gt;</td>
+<td style="text-align:center">代表建议换行 (Word Break Opportunity) ，当文本太长需要换行时将会在此处添加换行符</td>
+</tr>
+</tbody>
+</table>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;ins&gt;</td>
+<td style="text-align:center">定义增加 到文档的内容</td>
+</tr>
+<tr>
+<td>&lt;del&gt;</td>
+<td style="text-align:center">定义从文档移除 的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="嵌入内容"><a href="#嵌入内容" class="headerlink" title="嵌入内容"></a>嵌入内容</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;img&gt;</td>
+<td style="text-align:center">代表一张图片</td>
+</tr>
+<tr>
+<td>&lt;iframe&gt;</td>
+<td style="text-align:center">代表一个内联的框架</td>
+</tr>
+<tr>
+<td>&lt;embed&gt;</td>
+<td style="text-align:center">代表一个嵌入 的外部资源，如应用程序或交互内容</td>
+</tr>
+<tr>
+<td>&lt;object&gt;</td>
+<td style="text-align:center">代表一个外部资源 ，如图片、HTML 子文档、插件等</td>
+</tr>
+<tr>
+<td>&lt;video&gt;</td>
+<td style="text-align:center">代表一段视频 及其视频文件和字幕，并提供了播放视频的用户界面</td>
+</tr>
+<tr>
+<td>&lt;audio&gt;</td>
+<td style="text-align:center">代表一段声音 ，或音频流</td>
+</tr>
+<tr>
+<td>&lt;source&gt;</td>
+<td style="text-align:center">为 &lt;video&gt; 或 &lt;audio&gt; 这类媒体元素指定媒体源</td>
+</tr>
+<tr>
+<td>&lt;track&gt;</td>
+<td style="text-align:center">为 &lt;video&gt; 或 &lt;audio&gt; 这类媒体元素指定文本轨道（字幕）</td>
+</tr>
+<tr>
+<td>&lt;canvas&gt;</td>
+<td style="text-align:center">代表位图区域 ，可以通过脚本在它上面实时呈现图形，如图表、游戏绘图等</td>
+</tr>
+<tr>
+<td>&lt;map&gt;</td>
+<td style="text-align:center">与 &lt;area&gt; 元素共同定义图像映射 区域</td>
+</tr>
+<tr>
+<td>&lt;area&gt;</td>
+<td style="text-align:center">与 &lt;map&gt; 元素共同定义图像映射 区域</td>
+</tr>
+<tr>
+<td>&lt;svg&gt;</td>
+<td style="text-align:center">定义一个嵌入式矢量图</td>
+</tr>
+<tr>
+<td>&lt;math&gt;</td>
+<td style="text-align:center">定义一段数学公式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;table&gt;</td>
+<td style="text-align:center">定义多维数据</td>
+</tr>
+<tr>
+<td>&lt;caption&gt;</td>
+<td style="text-align:center">代表表格的标题</td>
+</tr>
+<tr>
+<td>&lt;colgroup&gt;代表表格中一组单列或多列</td>
+</tr>
+<tr>
+<td>&lt;col&gt;</td>
+<td style="text-align:center">代表表格中的列</td>
+</tr>
+<tr>
+<td>&lt;tbody&gt;</td>
+<td style="text-align:center">代表表格中一块具体数据 （表格主体）</td>
+</tr>
+<tr>
+<td>&lt;thead&gt;</td>
+<td style="text-align:center">代表表格中一块列标签 （表头）</td>
+</tr>
+<tr>
+<td>&lt;tfoot&gt;</td>
+<td style="text-align:center">代表表格中一块列摘要 （表尾）</td>
+</tr>
+<tr>
+<td>&lt;tr&gt;</td>
+<td style="text-align:center">代表表格中的行</td>
+</tr>
+<tr>
+<td>&lt;td&gt;</td>
+<td style="text-align:center">代表表格中的单元格</td>
+</tr>
+<tr>
+<td>&lt;th&gt;</td>
+<td style="text-align:center">代表表格中的头部单元格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;form&gt;</td>
+<td style="text-align:center">代表一个表单 ，由控件组成</td>
+</tr>
+<tr>
+<td>&lt;fieldset&gt;</td>
+<td style="text-align:center">代表控件组</td>
+</tr>
+<tr>
+<td>&lt;legend&gt;</td>
+<td style="text-align:center">代表 &lt;fieldset&gt; 控件组的标题</td>
+</tr>
+<tr>
+<td>&lt;label&gt;</td>
+<td style="text-align:center">代表表单控件的标题</td>
+</tr>
+<tr>
+<td>&lt;input&gt;</td>
+<td style="text-align:center">代表允许用户编辑数据的数据区 （文本框、单选框、复选框等）</td>
+</tr>
+<tr>
+<td>&lt;button&gt;</td>
+<td style="text-align:center">代表按钮</td>
+</tr>
+<tr>
+<td>&lt;select&gt;</td>
+<td style="text-align:center">代表下拉框</td>
+</tr>
+<tr>
+<td>&lt;datalist&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入 代表提供给其他控件的一组预定义选项</td>
+</tr>
+<tr>
+<td>&lt;optgroup&gt;</td>
+<td style="text-align:center">代表一个选项分组</td>
+</tr>
+<tr>
+<td>&lt;option&gt;</td>
+<td style="text-align:center">代表一个 &lt;select&gt; 元素或 &lt;datalist&gt; 元素中的一个选项</td>
+</tr>
+<tr>
+<td>&lt;textarea&gt;</td>
+<td style="text-align:center">代表多行文本框</td>
+</tr>
+<tr>
+<td>&lt;keygen&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入    代表一个密钥对生成器 控件</td>
+</tr>
+<tr>
+<td>&lt;output&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入    代表计算值</td>
+</tr>
+<tr>
+<td>&lt;progress&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入 代表进度条</td>
+</tr>
+<tr>
+<td>&lt;meter&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入    代表滑动条</td>
+</tr>
+</tbody>
+</table>
+<h3 id="交互元素"><a href="#交互元素" class="headerlink" title="交互元素"></a>交互元素</h3><table>
+<thead>
+<tr>
+<th>Element</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;details&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入    代表一个用户可以(点击)获取额外信息或控件的小部件</td>
+</tr>
+<tr>
+<td>&lt;summary&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入    代表 &lt;details&gt; 元素的综述 或标题</td>
+</tr>
+<tr>
+<td>&lt;menuitem&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入 代表一个用户可以点击的菜单项</td>
+</tr>
+<tr>
+<td>&lt;menu&gt;</td>
+<td style="text-align:center">这个元素在 HTML5 中加入 代表菜单</td>
+</tr>
+</tbody>
+</table>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/HTML/">HTML</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

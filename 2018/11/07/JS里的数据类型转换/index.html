@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>JS里的数据类型转换 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"介绍JS里的数据类型如何进行类型转换，Symbol类型不讨论\n\n任意类型转换成Number类型1.Number(a)\n除了要转换的类型本身内容是数字将被转换成对应的number，其余类型都会被转换成NaN(非数字)\n\nNumber(&apos;1&apos;)        //1\n\nNumber(&apos;s&apos;)        //NaN\n\nNumber(&apos;null&apos;)    //0\n\nNumber(&apos;undefined&apos;)    //NaN\n\nobj = {a:5}\nNumber(obj)        //NaN\n\nfunction a(){ return 1;}    //NaN\nNumber(a)\n2.parseInt(a,b)\n将字符串转换成整数类型，第一个参数代表要转换的内容，第二个参数代表要转换成什么进制。一般选择十进制。进制取值为2~37\n\nparseInt(&apos;011&apos;,10)        //11\n\nparseInt(&apos;0x11&apos;,10)        //0\n\nparseInt(&apos;011&apos;,36)        //37\n\nparseInt(&apos;0x11&apos;)        //17\n\nparseInt(&apos;08&apos;)            //8\n\nparseInt(&apos;011&apos;,2)        //3\n3.parseFloat(a)\n将字符串转换成浮点数，只能转换成十进制\n\nparseFloat(&apos;3.14&apos;)            //3.14\n\nparseFloat(&apos;314e-2&apos;)        //3.14\n\nparseFloat(&quot;0.0314E+2&quot;)        //3.14\n\nparseFloat(&quot;3.14more non-digit characters&quot;)        //3.14\n\nparseFloat(&quot;FF2&quot;)            //NaN\n非常规方法 4. &#39;1&#39;-0 &amp; 5. +&#39;1&#39;\n方便的让字符串转换成数字。既能转换成整数，又能转换成浮点数。\n\n&apos;1.23&apos; -0        //1.23\n\n0+&apos;1.23&apos;        //&quot;1.23&quot;\n2.任意字符转换成String类型1.toString(a)\n用toString()方法只能将number类型和Boolean类型转换成字符串。null、undefined会报错，object类型会显示不完全。\n\nvar a = 1\na.toString()        //&quot;1&quot;\n\nvar b = true\nb.toString()        //&quot;true&quot;\n\nvar c = null\nc.toString()        //Cannot read property &apos;toString&apos; of null\n\nvar d = undefined    //Cannot read property &apos;toString&apos; of null\nd.toString()\n\nvar obj = { a:1 }\nobj.toString()        //&quot;[object Object]&quot;\n2.String(a)\n用String()是一个全局函数，可以将所有类型转换为字符串\n\nString(1)            //&quot;1&quot;\n\nString(null)        //&quot;null&quot;\n\nString(undefined)    //&quot;undefined&quot;\n\nString(true)        //&quot;true&quot;\n\nString(obj)            //&quot;[object Object]&quot;\n非常规方法 3. &#39;&#39; + x &amp; 4. x + &#39;&#39;\n加上一个空字符串就可以快速将其他类型转换成字符串\n\n1 + &apos;&apos;            //&quot;1&quot;\n\nnull + &apos;&apos;        //&quot;null&quot;\n\nundefined + &apos;&apos;    //&quot;undefined&quot;\n\ntrue + &apos;&apos;        //&quot;true&quot;\n\nobj + &apos;&apos;        //&quot;[object Object]&quot;\n任意类型转换成Boolean类型1.Boolean(a)\n可以转换所有类型为布尔类型\n\nBoolean(1)            //true\n\nBoolean(&apos;s&apos;)        //true\n\nBoolean(null)        //false\n\nBoolean(undefined)    //false\n\nBoolean(obj)        //true\n\nBoolean(function(){})    //true\n非常规方法 2.!! + x\n这是一种最便捷最快的方式来使其他类型转换为布尔类型\n\n!!1                //true\n\n!!null            //false\n\n!!undefined        //false\n\n!!obj            //true\n\n!!&apos;s&apos;            //true\n\n布尔类型中有五个falsy值，分别是：NaN, 0, null, undefined, ‘’.\nfalsy是在Boolean 上下文中认定可转换为false的值.\n对象数据类型无论是空对象还是其他对象，只要是对象转换为布尔值就是true\nMDN: https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy\n\n深拷贝VS浅拷贝\n注：深拷贝浅拷贝可以通过画内存图了解区别。\n\n深拷贝\nb变不影响a，这样就是深拷贝。另外基本类型赋值就是深拷贝。\n\nvar a = 1    //undefined\nvar b = a    //undefined\nb = 2        //2\na            //1\n浅拷贝\nb变影响a变，这样就是浅拷贝。\n\nvar a = {                //undefined\nname:&apos;a&apos;\n}\n\nvar b = a                //undefined\n\nb.name=&apos;b&apos;                //&quot;b&quot;\n\na.name                    //&quot;b&quot;\n","dateCreated":"2018-11-07T21:05:32+08:00","dateModified":"2018-11-07T22:18:36+08:00","datePublished":"2018-11-07T21:05:32+08:00","description":"介绍JS里的数据类型如何进行类型转换，Symbol类型不讨论","headline":"JS里的数据类型转换","image":["https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg","https://i.loli.net/2018/11/07/5be2e4686be6f.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/11/07/JS里的数据类型转换/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/11/07/JS里的数据类型转换/","keywords":"前端, JavaScript","thumbnailUrl":"https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"}</script>
+    <meta name="description" content="介绍JS里的数据类型如何进行类型转换，Symbol类型不讨论">
+<meta name="keywords" content="前端,JavaScript">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="JS里的数据类型转换">
+<meta property="og:url" content="/2018/11/07/JS里的数据类型转换/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍JS里的数据类型如何进行类型转换，Symbol类型不讨论">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-11-07T14:18:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS里的数据类型转换">
+<meta name="twitter:description" content="介绍JS里的数据类型如何进行类型转换，Symbol类型不讨论">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/07/5be2e4686be6f.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/07/5be2e4686be6f.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.loli.net/2018/11/07/5be2e4686be6f.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            JS里的数据类型转换
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>介绍JS里的数据类型如何进行类型转换，<code>Symbol</code>类型不讨论<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#任意类型转换成Number类型"><span class="toc-text">任意类型转换成Number类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Number-a"><span class="toc-text">1.Number(a)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-parseInt-a-b"><span class="toc-text">2.parseInt(a,b)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-parseFloat-a"><span class="toc-text">3.parseFloat(a)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非常规方法-4-39-1-39-0-amp-5-39-1-39"><span class="toc-text">非常规方法 4. &#39;1&#39;-0 &amp; 5. +&#39;1&#39;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-任意字符转换成String类型"><span class="toc-text">2.任意字符转换成String类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-toString-a"><span class="toc-text">1.toString(a)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-String-a"><span class="toc-text">2.String(a)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非常规方法-3-39-39-x-amp-4-x-39-39"><span class="toc-text">非常规方法 3. &#39;&#39; + x &amp; 4. x + &#39;&#39;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任意类型转换成Boolean类型"><span class="toc-text">任意类型转换成Boolean类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Boolean-a"><span class="toc-text">1.Boolean(a)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非常规方法-2-x"><span class="toc-text">非常规方法 2.!! + x</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深拷贝VS浅拷贝"><span class="toc-text">深拷贝VS浅拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-text">深拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浅拷贝"><span class="toc-text">浅拷贝</span></a></li></ol></li></ol>
+<h2 id="任意类型转换成Number类型"><a href="#任意类型转换成Number类型" class="headerlink" title="任意类型转换成Number类型"></a>任意类型转换成Number类型</h2><h3 id="1-Number-a"><a href="#1-Number-a" class="headerlink" title="1.Number(a)"></a>1.Number(a)</h3><blockquote>
+<p>除了要转换的类型本身内容是数字将被转换成对应的number，其余类型都会被转换成<code>NaN</code>(非数字)</p>
+</blockquote>
+<pre><code>Number(&apos;1&apos;)        //1
+
+Number(&apos;s&apos;)        //NaN
+
+Number(&apos;null&apos;)    //0
+
+Number(&apos;undefined&apos;)    //NaN
+
+obj = {a:5}
+Number(obj)        //NaN
+
+function a(){ return 1;}    //NaN
+Number(a)
+</code></pre><h3 id="2-parseInt-a-b"><a href="#2-parseInt-a-b" class="headerlink" title="2.parseInt(a,b)"></a>2.parseInt(a,b)</h3><blockquote>
+<p>将字符串转换成整数类型，第一个参数代表要转换的内容，第二个参数代表要转换成什么进制。一般选择十进制。进制取值为2~37</p>
+</blockquote>
+<pre><code>parseInt(&apos;011&apos;,10)        //11
+
+parseInt(&apos;0x11&apos;,10)        //0
+
+parseInt(&apos;011&apos;,36)        //37
+
+parseInt(&apos;0x11&apos;)        //17
+
+parseInt(&apos;08&apos;)            //8
+
+parseInt(&apos;011&apos;,2)        //3
+</code></pre><h3 id="3-parseFloat-a"><a href="#3-parseFloat-a" class="headerlink" title="3.parseFloat(a)"></a>3.parseFloat(a)</h3><blockquote>
+<p>将字符串转换成浮点数，只能转换成十进制</p>
+</blockquote>
+<pre><code>parseFloat(&apos;3.14&apos;)            //3.14
+
+parseFloat(&apos;314e-2&apos;)        //3.14
+
+parseFloat(&quot;0.0314E+2&quot;)        //3.14
+
+parseFloat(&quot;3.14more non-digit characters&quot;)        //3.14
+
+parseFloat(&quot;FF2&quot;)            //NaN
+</code></pre><h3 id="非常规方法-4-39-1-39-0-amp-5-39-1-39"><a href="#非常规方法-4-39-1-39-0-amp-5-39-1-39" class="headerlink" title="非常规方法 4. &#39;1&#39;-0 &amp; 5. +&#39;1&#39;"></a>非常规方法 4. <code>&#39;1&#39;-0</code> &amp; 5. <code>+&#39;1&#39;</code></h3><blockquote>
+<p>方便的让字符串转换成数字。既能转换成整数，又能转换成浮点数。</p>
+</blockquote>
+<pre><code>&apos;1.23&apos; -0        //1.23
+
+0+&apos;1.23&apos;        //&quot;1.23&quot;
+</code></pre><h2 id="2-任意字符转换成String类型"><a href="#2-任意字符转换成String类型" class="headerlink" title="2.任意字符转换成String类型"></a>2.任意字符转换成String类型</h2><h3 id="1-toString-a"><a href="#1-toString-a" class="headerlink" title="1.toString(a)"></a>1.toString(a)</h3><blockquote>
+<p>用toString()方法只能将number类型和Boolean类型转换成字符串。null、undefined会报错，object类型会显示不完全。</p>
+</blockquote>
+<pre><code>var a = 1
+a.toString()        //&quot;1&quot;
+
+var b = true
+b.toString()        //&quot;true&quot;
+
+var c = null
+c.toString()        //Cannot read property &apos;toString&apos; of null
+
+var d = undefined    //Cannot read property &apos;toString&apos; of null
+d.toString()
+
+var obj = { a:1 }
+obj.toString()        //&quot;[object Object]&quot;
+</code></pre><h3 id="2-String-a"><a href="#2-String-a" class="headerlink" title="2.String(a)"></a>2.String(a)</h3><blockquote>
+<p>用String()是一个全局函数，可以将所有类型转换为字符串</p>
+</blockquote>
+<pre><code>String(1)            //&quot;1&quot;
+
+String(null)        //&quot;null&quot;
+
+String(undefined)    //&quot;undefined&quot;
+
+String(true)        //&quot;true&quot;
+
+String(obj)            //&quot;[object Object]&quot;
+</code></pre><h3 id="非常规方法-3-39-39-x-amp-4-x-39-39"><a href="#非常规方法-3-39-39-x-amp-4-x-39-39" class="headerlink" title="非常规方法 3. &#39;&#39; + x &amp; 4. x + &#39;&#39;"></a>非常规方法 3. <code>&#39;&#39; + x</code> &amp; 4. <code>x + &#39;&#39;</code></h3><blockquote>
+<p>加上一个空字符串就可以快速将其他类型转换成字符串</p>
+</blockquote>
+<pre><code>1 + &apos;&apos;            //&quot;1&quot;
+
+null + &apos;&apos;        //&quot;null&quot;
+
+undefined + &apos;&apos;    //&quot;undefined&quot;
+
+true + &apos;&apos;        //&quot;true&quot;
+
+obj + &apos;&apos;        //&quot;[object Object]&quot;
+</code></pre><h2 id="任意类型转换成Boolean类型"><a href="#任意类型转换成Boolean类型" class="headerlink" title="任意类型转换成Boolean类型"></a>任意类型转换成Boolean类型</h2><h3 id="1-Boolean-a"><a href="#1-Boolean-a" class="headerlink" title="1.Boolean(a)"></a>1.Boolean(a)</h3><blockquote>
+<p>可以转换所有类型为布尔类型</p>
+</blockquote>
+<pre><code>Boolean(1)            //true
+
+Boolean(&apos;s&apos;)        //true
+
+Boolean(null)        //false
+
+Boolean(undefined)    //false
+
+Boolean(obj)        //true
+
+Boolean(function(){})    //true
+</code></pre><h3 id="非常规方法-2-x"><a href="#非常规方法-2-x" class="headerlink" title="非常规方法 2.!! + x"></a>非常规方法 2.<code>!! + x</code></h3><blockquote>
+<p>这是一种最便捷最快的方式来使其他类型转换为布尔类型</p>
+</blockquote>
+<pre><code>!!1                //true
+
+!!null            //false
+
+!!undefined        //false
+
+!!obj            //true
+
+!!&apos;s&apos;            //true
+</code></pre><ul>
+<li>布尔类型中有五个falsy值，分别是：NaN, 0, null, undefined, ‘’.</li>
+<li>falsy是在Boolean 上下文中认定可转换为false的值.</li>
+<li>对象数据类型无论是空对象还是其他对象，只要是对象转换为布尔值就是true</li>
+<li>MDN: <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy</a></li>
+</ul>
+<h2 id="深拷贝VS浅拷贝"><a href="#深拷贝VS浅拷贝" class="headerlink" title="深拷贝VS浅拷贝"></a>深拷贝VS浅拷贝</h2><blockquote>
+<p>注：深拷贝浅拷贝可以通过画内存图了解区别。</p>
+</blockquote>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><blockquote>
+<p>b变不影响a，这样就是深拷贝。另外基本类型赋值就是深拷贝。</p>
+</blockquote>
+<pre><code>var a = 1    //undefined
+var b = a    //undefined
+b = 2        //2
+a            //1
+</code></pre><h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><blockquote>
+<p>b变影响a变，这样就是浅拷贝。</p>
+</blockquote>
+<pre><code>var a = {                //undefined
+name:&apos;a&apos;
+}
+
+var b = a                //undefined
+
+b.name=&apos;b&apos;                //&quot;b&quot;
+
+a.name                    //&quot;b&quot;
+</code></pre>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/JavaScript/">JavaScript</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

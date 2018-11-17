@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>CSS之宽度与高度 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。\n\ndiv的高度\n每种字体的建议行高不同，有的是1.4倍，有的是1.3倍。都是字体设计师设计的。如图所示\n\n\n你可以规定行高是多少，把行高限定死。\n\ndiv里写空格要用转移字符。\n\n当你要让文字对齐的时候用到的技巧：\n1.让2个span元素line-height:justify属性，当时单行显示不出效果，只有多行才能对齐。\n2.这时候你再后面追加一个伪元素，让他为inline-block属性。伪元素宽度为span的5em，多行时line-height:justify对齐。\n\n只要是inline元素，两个之间只要不是连在一起，就会出现空格，如图\n\n不用display：inline-block，用float：left，然后父元素清除浮动(clearfix)，就能实现没有空格的效果。\n\n文字省略溢出white-space:nowrap属性——不换行，超出部分往右显示。div宽度不会随文字变长。\n\noverflow:hidden            //超出部分省略\ntext-overflow:ellipsis    //超出部分变成省略号\n\n搜多行文本怎么省略\n\n文字垂直居中outline不占据空间，border占据空间\n父元素不限定高度的时候怎么居中，就用padding！\n不要用height和line-height！！！\n不要用height和line-height！！！\n不要用height和line-height！！！\n\nmargin合并子元素的padding属性会影响父元素的高度，毋庸置疑。\n子元素的margin属性会影响父元素高度吗？\n答案是不一定！分情况！\n1.当父元素有border属性时，子元素的margin会影响父元素高度（很好理解）\n2.当父元素没有border属性时，父元素高度如图所示。左右间距受到padding属性影响，但是上下间距却纹丝不动。这是因为magIn合并了。\n如果父元素没有东西挡住子元素margin，那么子元素的margin就会超出父元素高度。\n\n这时候如果给父元素的父元素(如body)添加一个border，就会发现父元素和body之间存在子元素的margin间距\n\n解决方法：\n给父元素一个属性（只要能挡住margin，不让合并就行）如margin padding。就能取消margin合并\n\n还有种方法 overflow:hidden，顾名思义：让溢出后的内容隐藏掉。（但是不推荐这么做）\n因为你加了这个属性后所有内容都在写在父元素内，要做一些功能（如悬浮窗）就实现不了。\n所以 \noverflow:hidden不到万不得已就不用！\noverflow:hidden不到万不得已就不用！\noverflow:hidden不到万不得已就不用！\n加个padding就好了\n\n总结文档流1.div高度是由内部文档流中元素的总和决定的。\n2.文档流中每个div（块级元素）都会另起一行。内联元素从左到右，块级元素从上到下每一个都另起一行。\n怎么让元素脱离文档流？很多方式。脱离文档流的意思是让父元素的高度不计算脱离文档流内容的高度。(算高度时候别叫上我)\n\n注意：相对定位的子元素不脱离文档流。父元素算上其高度，其位置可以相对于父元素发生变化。不影响其他子元素的位置。\n\n确定元素宽高内联元素的宽高内联元素的宽度受padding和margin影响，但是高度不受影响！！！\n块级元素的宽高div的宽度不要去改它，会自适应父元素宽度。\ndiv的高度：如果div内是内联元素，就所有行高加起来；如果是块级元素，就把它的内容，border，padding,margin(看不合并)影响div高度。\n总结：块级元素的高度由它内部文档流元素高度的总和决定的。\n如何绝对居中（上下左右都居中）1.父元素不限定高度的情况下：\n让子元素添加padding,实现上下居中。让父元素margin左右自适应实现 子元素左右居中。\n\n2.确定父元素的高度后怎么绝对居中？（只有一种情况下需要这么做，父元素是全屏显示body）\n第一种办法：先让父元素变成box-sizing:border-box盒模型；然后子元素四个方向margin都auto（但是没用 CSS BUG,只能左右auto不能上下auto）,解决方法：设置为绝对定位。但是子元素必须设置height，不能确定子元素高度就不能用这种方法。\n第二种办法：用flex布局，3句话绝对居中（IE不支持，用JS做）如果IE要支持，去搜CSS垂直居中的7种方法。\n\n可以做出对话框效果\n\n如何实现一个一比一的divpadding-top:100%;\n分析：div高度是0，从下到上全是padding-top。padding-top:100%是让padding和宽度一样。\n就实现了宽度自适应，高度为0。用padding-top实现高度定位。\n\n","dateCreated":"2018-11-11T22:35:05+08:00","dateModified":"2018-11-11T23:49:04+08:00","datePublished":"2018-11-11T22:35:05+08:00","description":"介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。","headline":"CSS之宽度与高度","image":["https://i.loli.net/2018/11/11/5be83ef037b51.jpg","https://i.loli.net/2018/11/11/5be84ddf06b1f.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/11/11/CSS之宽度与高度/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/11/11/CSS之宽度与高度/","keywords":"前端, CSS","thumbnailUrl":"https://i.loli.net/2018/11/11/5be83ef037b51.jpg"}</script>
+    <meta name="description" content="介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。">
+<meta name="keywords" content="前端,CSS">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS之宽度与高度">
+<meta property="og:url" content="/2018/11/11/CSS之宽度与高度/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84099f086c.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be840e36bad2.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8412e2b975.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be841db24075.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be843b927423.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84414b518c.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84461c817d.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84508b3e49.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84539c17a8.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be845e552c45.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8462d240e0.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8465dde701.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8465dde701.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8469de01ab.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8472809d0c.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be8474b91ce4.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be847d498319.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84a0e322e4.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84e8a85504.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84efe086d5.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/11/11/5be84f628e50f.jpg">
+<meta property="og:updated_time" content="2018-11-11T15:49:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS之宽度与高度">
+<meta name="twitter:description" content="介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。">
+<meta name="twitter:image" content="https://i.loli.net/2018/11/11/5be84099f086c.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/11/5be83ef037b51.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/11/5be83ef037b51.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/11/5be84ddf06b1f.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/11/5be84ddf06b1f.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.loli.net/2018/11/11/5be84ddf06b1f.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            CSS之宽度与高度
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>介绍CSS里 元素的宽度与高度到底由什么确定，有哪些实用方法，另外附上一些小技巧和概念理解。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#div的高度"><span class="toc-text">div的高度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文字省略溢出"><span class="toc-text">文字省略溢出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文字垂直居中"><span class="toc-text">文字垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#margin合并"><span class="toc-text">margin合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档流"><span class="toc-text">文档流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确定元素宽高"><span class="toc-text">确定元素宽高</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内联元素的宽高"><span class="toc-text">内联元素的宽高</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素的宽高"><span class="toc-text">块级元素的宽高</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何绝对居中（上下左右都居中）"><span class="toc-text">如何绝对居中（上下左右都居中）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现一个一比一的div"><span class="toc-text">如何实现一个一比一的div</span></a></li></ol></li></ol>
+<h2 id="div的高度"><a href="#div的高度" class="headerlink" title="div的高度"></a>div的高度</h2><blockquote>
+<p>每种字体的建议行高不同，有的是1.4倍，有的是1.3倍。都是字体设计师设计的。如图所示</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/11/11/5be84099f086c.jpg" alt=""></p>
+<p>你可以规定行高是多少，把行高限定死。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be840e36bad2.jpg" alt=""></p>
+<p>div里写空格要用转移字符。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8412e2b975.jpg" alt=""></p>
+<p>当你要让文字对齐的时候用到的技巧：</p>
+<p>1.让2个span元素line-height:justify属性，当时单行显示不出效果，只有多行才能对齐。</p>
+<p>2.这时候你再后面追加一个伪元素，让他为inline-block属性。伪元素宽度为span的5em，多行时line-height:justify对齐。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be841db24075.jpg" alt=""></p>
+<p>只要是inline元素，两个之间只要不是连在一起，就会出现空格，如图</p>
+<p><img src="https://i.loli.net/2018/11/11/5be843b927423.jpg" alt=""></p>
+<p>不用display：inline-block，用float：left，然后父元素清除浮动(clearfix)，就能实现没有空格的效果。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84414b518c.jpg" alt=""></p>
+<h2 id="文字省略溢出"><a href="#文字省略溢出" class="headerlink" title="文字省略溢出"></a>文字省略溢出</h2><p>white-space:nowrap属性——不换行，超出部分往右显示。div宽度不会随文字变长。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84461c817d.jpg" alt=""></p>
+<pre><code>overflow:hidden            //超出部分省略
+text-overflow:ellipsis    //超出部分变成省略号
+</code></pre><p><img src="https://i.loli.net/2018/11/11/5be84508b3e49.jpg" alt=""></p>
+<p>搜多行文本怎么省略</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84539c17a8.jpg" alt=""></p>
+<h2 id="文字垂直居中"><a href="#文字垂直居中" class="headerlink" title="文字垂直居中"></a>文字垂直居中</h2><p>outline不占据空间，border占据空间</p>
+<p>父元素不限定高度的时候怎么居中，就用padding！</p>
+<p><strong>不要用height和line-height！！！</strong></p>
+<p><strong>不要用height和line-height！！！</strong></p>
+<p><strong>不要用height和line-height！！！</strong></p>
+<p><img src="https://i.loli.net/2018/11/11/5be845e552c45.jpg" alt=""></p>
+<h2 id="margin合并"><a href="#margin合并" class="headerlink" title="margin合并"></a>margin合并</h2><p>子元素的padding属性会影响父元素的高度，毋庸置疑。</p>
+<p>子元素的margin属性会影响父元素高度吗？</p>
+<p>答案是不一定！分情况！</p>
+<p>1.当父元素有border属性时，子元素的margin会影响父元素高度（很好理解）</p>
+<p>2.当父元素没有border属性时，父元素高度如图所示。左右间距受到padding属性影响，但是上下间距却纹丝不动。这是因为magIn合并了。</p>
+<p>如果父元素没有东西挡住子元素margin，那么子元素的margin就会超出父元素高度。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8462d240e0.jpg" alt=""></p>
+<p>这时候如果给父元素的父元素(如body)添加一个border，就会发现父元素和body之间存在子元素的margin间距</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8465dde701.jpg" alt=""></p>
+<p>解决方法：</p>
+<p>给父元素一个属性（只要能挡住margin，不让合并就行）如margin padding。就能取消margin合并</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8465dde701.jpg" alt=""></p>
+<p>还有种方法 overflow:hidden，顾名思义：让溢出后的内容隐藏掉。（但是不推荐这么做）</p>
+<p>因为你加了这个属性后所有内容都在写在父元素内，要做一些功能（如悬浮窗）就实现不了。</p>
+<p>所以 </p>
+<p>overflow:hidden不到万不得已就不用！</p>
+<p>overflow:hidden不到万不得已就不用！</p>
+<p>overflow:hidden不到万不得已就不用！</p>
+<p>加个padding就好了</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8469de01ab.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h3><p>1.div高度是由内部文档流中元素的总和决定的。</p>
+<p>2.文档流中每个div（块级元素）都会另起一行。内联元素从左到右，块级元素从上到下每一个都另起一行。</p>
+<p>怎么让元素脱离文档流？很多方式。脱离文档流的意思是让父元素的高度不计算脱离文档流内容的高度。(算高度时候别叫上我)</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8472809d0c.jpg" alt=""></p>
+<p>注意：相对定位的子元素不脱离文档流。父元素算上其高度，其位置可以相对于父元素发生变化。不影响其他子元素的位置。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be8474b91ce4.jpg" alt=""></p>
+<h3 id="确定元素宽高"><a href="#确定元素宽高" class="headerlink" title="确定元素宽高"></a>确定元素宽高</h3><h4 id="内联元素的宽高"><a href="#内联元素的宽高" class="headerlink" title="内联元素的宽高"></a>内联元素的宽高</h4><p>内联元素的宽度受padding和margin影响，但是高度不受影响！！！</p>
+<h4 id="块级元素的宽高"><a href="#块级元素的宽高" class="headerlink" title="块级元素的宽高"></a>块级元素的宽高</h4><p>div的宽度不要去改它，会自适应父元素宽度。</p>
+<p>div的高度：如果div内是内联元素，就所有行高加起来；如果是块级元素，就把它的内容，border，padding,margin(看不合并)影响div高度。</p>
+<p>总结：块级元素的高度由它内部文档流元素高度的总和决定的。</p>
+<h3 id="如何绝对居中（上下左右都居中）"><a href="#如何绝对居中（上下左右都居中）" class="headerlink" title="如何绝对居中（上下左右都居中）"></a>如何绝对居中（上下左右都居中）</h3><p>1.父元素不限定高度的情况下：</p>
+<p>让子元素添加padding,实现上下居中。让父元素margin左右自适应实现 子元素左右居中。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be847d498319.jpg" alt=""></p>
+<p>2.确定父元素的高度后怎么绝对居中？（只有一种情况下需要这么做，父元素是全屏显示body）</p>
+<p>第一种办法：先让父元素变成box-sizing:border-box盒模型；然后子元素四个方向margin都auto（但是没用 CSS BUG,只能左右auto不能上下auto）,解决方法：设置为绝对定位。但是子元素必须设置height，不能确定子元素高度就不能用这种方法。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84a0e322e4.jpg" alt=""><br>第二种办法：用flex布局，3句话绝对居中（IE不支持，用JS做）如果IE要支持，去搜CSS垂直居中的7种方法。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84e8a85504.jpg" alt=""></p>
+<p>可以做出对话框效果</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84efe086d5.jpg" alt=""></p>
+<h3 id="如何实现一个一比一的div"><a href="#如何实现一个一比一的div" class="headerlink" title="如何实现一个一比一的div"></a>如何实现一个一比一的div</h3><p>padding-top:100%;</p>
+<p>分析：div高度是0，从下到上全是padding-top。padding-top:100%是让padding和宽度一样。</p>
+<p>就实现了宽度自适应，高度为0。用padding-top实现高度定位。</p>
+<p><img src="https://i.loli.net/2018/11/11/5be84f628e50f.jpg" alt=""></p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/CSS/">CSS</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

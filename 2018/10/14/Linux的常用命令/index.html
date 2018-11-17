@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>linux的常用命令 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"LINUX一些常用命令简单了解\n\nls命令\nls命令用来显示目标列表，在Linux中是使用率较高的命令。ls命令的输出信息可以进行彩色加亮显示，以分区不同类型的文件。下面会列出一些ls命令常用参数。\n\n\nls -1 参数  每行列出一个文件。  \nls -a 参数  列出所有文件，包括隐藏文件。  \nls -la 参数  所有文件的长格式列表（权限，所有权，大小和修改日期）。  \nls -lh 参数  使用人类可读单位（KB，MB，GB）显示大小的长格式列表。  \nls -ls 参数  按大小排序的长格式列表（按降序排序）。  \nls -ltr 参数  所有文件的长格式列表，按修改日期排序（按最早时间开始排序）。  \n\ncat命令\ncat命令的用途是连接文件或标准输入并打印。这个命令常用来显示文件内容，或者将几个文件连接起来显示，或者从标准输入读取内容并显示，它常与重定向符号配合使用。\n\n\ncat file 指令   含义：一次显示整个文件。   \ncat file1 file2 &gt; target_file 指令  含义：将多个文件连接到目标文件中。  \ncat file1 file2 &gt;&gt; target_file 指令  含义：将几个文件附加到目标文件中。  \ncat -n file 参数指令  含义：编号所有输出行  \n\nmv命令\nmv命令是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。\n\n\nmv 参数  在任意位置移动文件。  \nmv -f 参数  在覆盖现有文件之前不要提示确认。  \nmv -fi 参数  在覆盖现有文件之前不要提示确认，但在覆盖之前写入标准错误。  \nmv -v参数  以详细模式移动文件，在移动文件后显示文件。  \n\ntouch命令\ntouch命令有两个功能：一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建新的空文件。\n\n\ntouch filename指令  创建新的空文件或将现有文件的时间更改为当前时间。  \ntouch -t YYYYMMDDHHMM.SS filename指令  将文件上的时间设置为特定的日期和时间。  \ntouch -r filename filename2指令  使用文件中的时间设置第二个文件的时间。  \n\n如何使用 explainshell.com 网站当你想查询LINUX下命令的参数时候，可以访问explainshell.com 网站以便节省时间。\n","dateCreated":"2018-10-14T21:55:29+08:00","dateModified":"2018-10-24T15:36:32+08:00","datePublished":"2018-10-14T21:55:29+08:00","description":"LINUX一些常用命令简单了解","headline":"linux的常用命令","image":["https://i.imgur.com/h1Uve70.png","https://i.imgur.com/TplgzI9.gif"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/14/Linux的常用命令/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/14/Linux的常用命令/","keywords":"前端, 命令","thumbnailUrl":"https://i.imgur.com/h1Uve70.png"}</script>
+    <meta name="description" content="LINUX一些常用命令简单了解">
+<meta name="keywords" content="前端,命令">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="linux的常用命令">
+<meta property="og:url" content="/2018/10/14/Linux的常用命令/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="LINUX一些常用命令简单了解">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-24T07:36:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux的常用命令">
+<meta name="twitter:description" content="LINUX一些常用命令简单了解">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/h1Uve70.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/h1Uve70.png" />
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/TplgzI9.gif"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/TplgzI9.gif" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.imgur.com/TplgzI9.gif');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            linux的常用命令
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>LINUX一些常用命令简单了解<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ls命令"><span class="toc-text">ls命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat命令"><span class="toc-text">cat命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mv命令"><span class="toc-text">mv命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#touch命令"><span class="toc-text">touch命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用-explainshell-com-网站"><span class="toc-text">如何使用 explainshell.com 网站</span></a></li></ol>
+<h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><blockquote>
+<p><strong>ls命令</strong>用来显示目标列表，在Linux中是使用率较高的命令。ls命令的输出信息可以进行彩色加亮显示，以分区不同类型的文件。下面会列出一些ls命令常用参数。</p>
+</blockquote>
+<ul>
+<li>ls -1 参数<br>  每行列出一个文件。<br>  <br></li>
+<li>ls -a 参数<br>  列出所有文件，包括隐藏文件。<br>  <br></li>
+<li>ls -la 参数<br>  所有文件的长格式列表（权限，所有权，大小和修改日期）。<br>  <br></li>
+<li>ls -lh 参数<br>  使用人类可读单位（KB，MB，GB）显示大小的长格式列表。<br>  <br></li>
+<li>ls -ls 参数<br>  按大小排序的长格式列表（按降序排序）。<br>  <br></li>
+<li>ls -ltr 参数<br>  所有文件的长格式列表，按修改日期排序（按最早时间开始排序）。<br>  <br></li>
+</ul>
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><blockquote>
+<p><strong>cat命令</strong>的用途是连接文件或标准输入并打印。这个命令常用来显示文件内容，或者将几个文件连接起来显示，或者从标准输入读取内容并显示，它常与重定向符号配合使用。</p>
+</blockquote>
+<ul>
+<li>cat file 指令<br>   含义：一次显示整个文件。<br>   <br></li>
+<li>cat file1 file2 &gt; target_file 指令<br>  含义：将多个文件连接到目标文件中。<br>  <br></li>
+<li>cat file1 file2 &gt;&gt; target_file 指令<br>  含义：将几个文件附加到目标文件中。<br>  <br></li>
+<li>cat -n file 参数指令<br>  含义：编号所有输出行<br>  <br></li>
+</ul>
+<h2 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h2><blockquote>
+<p><strong>mv命令</strong>是move的缩写，可以用来移动文件或者将文件改名（move (rename) files），是Linux系统下常用的命令，经常用来备份文件或者目录。</p>
+</blockquote>
+<ul>
+<li>mv 参数<br>  在任意位置移动文件。<br>  <br></li>
+<li>mv -f 参数<br>  在覆盖现有文件之前不要提示确认。<br>  <br></li>
+<li>mv -fi 参数<br>  在覆盖现有文件之前不要提示确认，但在覆盖之前写入标准错误。<br>  <br></li>
+<li>mv -v参数<br>  以详细模式移动文件，在移动文件后显示文件。<br>  <br></li>
+</ul>
+<h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><blockquote>
+<p><strong>touch命令</strong>有两个功能：一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建新的空文件。</p>
+</blockquote>
+<ul>
+<li>touch filename指令<br>  创建新的空文件或将现有文件的时间更改为当前时间。<br>  <br></li>
+<li>touch -t YYYYMMDDHHMM.SS filename指令<br>  将文件上的时间设置为特定的日期和时间。<br>  <br></li>
+<li>touch -r filename filename2指令<br>  使用文件中的时间设置第二个文件的时间。<br>  <br></li>
+</ul>
+<h2 id="如何使用-explainshell-com-网站"><a href="#如何使用-explainshell-com-网站" class="headerlink" title="如何使用 explainshell.com 网站"></a>如何使用 explainshell.com 网站</h2><p>当你想查询LINUX下命令的参数时候，可以访问explainshell.com 网站以便节省时间。</p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a> <a class="tag tag--primary tag--small t-link" href="/tags/命令/">命令</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>

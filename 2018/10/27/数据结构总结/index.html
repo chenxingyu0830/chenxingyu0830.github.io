@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>数据结构总结 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等\n\n数据结构\n数据结构笔记\n\n\n\n堆排序排序算法中有一个叫做“归并排序”或者“合并排序”的算法，它用到的就是分而治之的思想，而它的时间复杂度就是N*logN，此算法采用的是二分法，所以可以认为对应的对数函数底数为2，也有可能是三分法，底数为3，以此类推。\n堆排序时间复杂度:初始化堆栈过程时间：O(n)\n更改堆元素后重建堆时间：O(nlogn)\n堆排序过程规则（1.堆排序的二叉树必须是完全二叉树 2.从右往左依次遍历）\n\n先比较最右边相邻叶子节点谁的值大，较大值的叶子节点与其父节点比较。若父节点较大则key值不换，若父节点较小则与叶子节点交换key值。\n根据过程1的步骤从右往左依次遍历其余相邻叶子节点与其父节点。\n比较 “倒数2层级组成的小树” 最右边的相邻节点谁的值大，较大值的节点与其父节点比较。若其父节点较大则key值不换。若其父节点较小则与该节点交换key值，并且进行过程1，2。\n根据过程1的步骤从右往左依次遍历其余相邻节点与其父节点。\n比较 “倒数3层级组成的小树” 最右边的相邻节点谁的值大，较大值的节点与其父节点比较。若其父节点较大则key值不换。若其父节点较小则与该节点交换key值，并且进行过程3，4。\n重复以上操作推理的下一步操作，直到确定到根节点的key值。\n然后将根节点与最右边叶子节点交换key值，取消该叶子节点的堆排序过程。\n将根节点与其子节点较大者的key值进行比较，若根节点大则不交换，若根节点小则交换Key值。重复推理操作，若中途不交换则结束比较，否则依次比较每个层次父节点与子节点大小，并且交换key值直至叶子节点。\n重复过程7，8。直到堆排序完成。\n\n","dateCreated":"2018-10-27T14:04:36+08:00","dateModified":"2018-10-31T16:19:00+08:00","datePublished":"2018-10-27T14:04:36+08:00","description":"个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等","headline":"数据结构总结","image":["https://i.imgur.com/7LRbkH6.png","https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-707748.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2018/10/27/数据结构总结/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2018/10/27/数据结构总结/","keywords":"CSS, 计算机基础","thumbnailUrl":"https://i.imgur.com/7LRbkH6.png"}</script>
+    <meta name="description" content="个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等">
+<meta name="keywords" content="CSS,计算机基础">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="数据结构总结">
+<meta property="og:url" content="/2018/10/27/数据结构总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://i.loli.net/2018/10/31/5bd9405f75e82.jpg">
+<meta property="og:image" content="https://i.imgur.com/PO5tYDf.jpg">
+<meta property="og:updated_time" content="2018-10-31T08:19:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构总结">
+<meta name="twitter:description" content="个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等">
+<meta name="twitter:image" content="https://i.loli.net/2018/10/31/5bd9405f75e82.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.imgur.com/7LRbkH6.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.imgur.com/7LRbkH6.png" />
+    
+    
+        <meta property="og:image" content="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-707748.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-707748.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-707748.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            数据结构总结
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>个人对数据结构基础知识总结: hash，queue，stack，链表，树，排序算法等<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序"><span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#堆排序时间复杂度"><span class="toc-text">堆排序时间复杂度:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆排序过程"><span class="toc-text">堆排序过程</span></a></li></ol></li></ol>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><blockquote>
+<p>数据结构笔记</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/10/31/5bd9405f75e82.jpg" alt="&quot;随笔&quot;"></p>
+<p><img src="https://i.imgur.com/PO5tYDf.jpg" alt="&quot;随笔&quot;"></p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>排序算法中有一个叫做“归并排序”或者“合并排序”的算法，它用到的就是分而治之的思想，而它的时间复杂度就是N*logN，此算法采用的是二分法，所以可以认为对应的对数函数底数为2，也有可能是三分法，底数为3，以此类推。</p>
+<h3 id="堆排序时间复杂度"><a href="#堆排序时间复杂度" class="headerlink" title="堆排序时间复杂度:"></a>堆排序时间复杂度:</h3><p>初始化堆栈过程时间：O(n)</p>
+<p>更改堆元素后重建堆时间：O(nlogn)</p>
+<h3 id="堆排序过程"><a href="#堆排序过程" class="headerlink" title="堆排序过程"></a>堆排序过程</h3><p>规则（1.堆排序的二叉树必须是完全二叉树 2.从右往左依次遍历）</p>
+<ol>
+<li>先比较最右边相邻叶子节点谁的值大，较大值的叶子节点与其父节点比较。若父节点较大则key值不换，若父节点较小则与叶子节点交换key值。</li>
+<li>根据过程1的步骤从右往左依次遍历其余相邻叶子节点与其父节点。</li>
+<li>比较 “倒数2层级组成的小树” 最右边的相邻节点谁的值大，较大值的节点与其父节点比较。若其父节点较大则key值不换。若其父节点较小则与该节点交换key值，并且进行过程1，2。</li>
+<li>根据过程1的步骤从右往左依次遍历其余相邻节点与其父节点。</li>
+<li>比较 “倒数3层级组成的小树” 最右边的相邻节点谁的值大，较大值的节点与其父节点比较。若其父节点较大则key值不换。若其父节点较小则与该节点交换key值，并且进行过程3，4。</li>
+<li>重复以上操作推理的下一步操作，直到确定到根节点的key值。</li>
+<li>然后将根节点与最右边叶子节点交换key值，取消该叶子节点的堆排序过程。</li>
+<li>将根节点与其子节点较大者的key值进行比较，若根节点大则不交换，若根节点小则交换Key值。重复推理操作，若中途不交换则结束比较，否则依次比较每个层次父节点与子节点大小，并且交换key值直至叶子节点。</li>
+<li>重复过程7，8。直到堆排序完成。</li>
+</ol>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/CSS/">CSS</a> <a class="tag tag--primary tag--small t-link" href="/tags/计算机基础/">计算机基础</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>
