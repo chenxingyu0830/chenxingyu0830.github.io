@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hexo">
+    <title>JavaScript模拟实现继承及ES6写法 - Hexo</title>
+    <meta name="author" content="SmallYU">
+    
+    
+        <link rel="icon" href="/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"SmallYU","sameAs":[],"image":"Avatar.jpg"},"articleBody":"介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。\n\n\n在ES6之前，JavaScript是没有类和继承这个概念的。ECMAScript 2015 中引入的 JavaScript 类实质上是 JavaScript 现有的基于原型的继承的语法糖。类语法不会为JavaScript引入新的面向对象的继承模型。所以我们在ES6之前实现类和类的继承是通过原型链来实现的。\n\n如何使用prototype实现继承？  首先我们需要定义一个对象，对象里存放对象自身的属性，同时对象的私有属性proto指向它的原型prototype，就可以存放对象的共有属性。例如：\nfunction Human(name){\n  this.name = name\n}\nHuman.prototype.say = function(){\n  console.log(&quot;我叫&quot; + this.name + &quot;,我在说话”)    \n}\n  这样我们就实现了一个对象的定义和添加了对象的方法。如果我们要让对象的子对象拥有对象的方法，怎么实现呢？答案很简单，我们只要让子对象的私有属性proto指向父对象即可。\nfunction Man(name){\n  Human.call(this, name)\n  this.sex = &apos;男&apos;    \n}\nMan.prototype._proto_ = Human.prototype\n  但是IE不支持man.prototype.proto = Human.prototype这种写法。所以我们只能通过新建一个空函数并让子对象指向空函数的方式来实现。\nvar f = {}\nf.prototype = Human.prototype\nman.prototype = new f()\n  实现原理是因为new运算符会\n// 1. 首先创建一个空函数\nvar object = new Fn();\n// 2. 将空对象的原型赋值为构造器函数的原型\nobject.__proto__ = Fn.prototype;\n// 3. 更改构造器函数内部this，将其指向新创建的空对象\nFn.call(this);\n// 4. 返回结果\nreturn this\n  所以我们创建空函数的过程中就会让空函数指向它的原型对象。我们只要让Fn.prototype = new f()就可以。但是因为Fn.call(this)的存在，会让子对象也有父对象的方法，这是我们不想要的结果。所以，我们需要一个中间过渡的空函数。\n  让子对象的原型指向空函数，空函数的原型指向父对象。这样就能子对象中避免call(this)返回我们不想要的父对象的方法。\nfunction Human(name){\n    this.name = name\n}\nHuman.prototype.say = function(){\n    console.log(&quot;我叫&quot;+this.name+&quot;，我在说话&quot;)\n    return undefined\n}\nfunction Man(name){\n    Human.call(this, name)\n    this.sex = &apos;男&apos;\n}\n\nvar f = function(){}\nf.prototype = Human.prototype\nMan.prototype = new f()\n\nMan.prototype.sleep = function(){\n    console.log(&apos;我在睡觉&apos;)\n}\n使用Class语法糖如何继承？  首先Class是ES6出现的语法糖。用Class实现继承的语法非常简单。代码如下：\nclass Human{\n  constructor(name){\n    this.name = name\n  }\n  say(){\n    console.log(&quot;我叫&quot; + this.name + &quot;，我在说话&quot;)\n  }\n}\nclass Man extends Human{\n  constructor(name){\n    super(name)\n    this.sex = &apos;男&apos;     \n  }\n  sleep(){\n    console.log(&apos;我在睡觉&apos;)\n  }\n}\nexpends表示Man对象接上Human对象的原型链constructor调用了父类的构造函数。super表示传递的属性。\n比较这两者之间的区别。  如果我们想在原型上声明一个属性，后者不支持声明属性。只能采取较为变通的写法:\nClass声明变量\nclass Man extends Human{\n  constructor(name){\n    super(name)\n    this.sex = &apos;男&apos;     \n  }\n  get 种族(){\n    return &apos;人类&apos;\n  }\n  sleep(){\n    console.log(&apos;我在睡觉&apos;)\n  }\n}\nES5声明变量\nfunction Human(name){\n    this.name = name\n}\nHuman.prototype.种族 = &apos;人类&apos;\nHuman.prototype.say = function(){\n    console.log(&quot;我叫&quot;+this.name+&quot;，我在说话&quot;)\n    return undefined\n}\n  结论：前者比后者清晰，后者比前者简单。\n","dateCreated":"2019-04-18T17:13:20+08:00","dateModified":"2019-04-23T20:15:14+08:00","datePublished":"2019-04-18T17:13:20+08:00","description":"介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。","headline":"JavaScript模拟实现继承及ES6写法","image":["https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg","https://i.loli.net/2018/11/10/5be68ad84026f.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"/2019/04/18/JavaScript模拟实现继承及ES6写法/"},"publisher":{"@type":"Organization","name":"SmallYU","sameAs":[],"image":"Avatar.jpg","logo":{"@type":"ImageObject","url":"Avatar.jpg"}},"url":"/2019/04/18/JavaScript模拟实现继承及ES6写法/","keywords":"前端, JavaScript","thumbnailUrl":"https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"}</script>
+    <meta name="description" content="介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。">
+<meta name="keywords" content="前端,JavaScript">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="JavaScript模拟实现继承及ES6写法">
+<meta property="og:url" content="/2019/04/18/JavaScript模拟实现继承及ES6写法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-04-23T12:15:14.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript模拟实现继承及ES6写法">
+<meta name="twitter:description" content="介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="/assets/images/Avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/04/5bdf10fb4ad3a.jpg" />
+    
+    
+        <meta property="og:image" content="https://i.loli.net/2018/11/10/5be68ad84026f.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://i.loli.net/2018/11/10/5be68ad84026f.jpg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-du2xmrqdqrl2ollgeiw050kpl6l4nbyz7bumjuurjgsxyopifvukebxc9lqe.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Hexo</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+                </a>
+                <h4 class="sidebar-profile-name">SmallYU</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="首页">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="分类">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="标签">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="归档">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="搜索">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="关于">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/chenxingyu0830" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-center
+                    post-header-cover--partial" style="background-image:url('https://i.loli.net/2018/11/10/5be68ad84026f.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            JavaScript模拟实现继承及ES6写法
+        </h1>
+    
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>介绍JS中继承的写法，包括使用prototype如何继承？使用Class语法糖如何继承？比较这两者之间的区别。<br><a id="more"></a></p>
+<h1 id="table-of-contents">目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用prototype实现继承？"><span class="toc-text">如何使用prototype实现继承？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Class语法糖如何继承？"><span class="toc-text">使用Class语法糖如何继承？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较这两者之间的区别。"><span class="toc-text">比较这两者之间的区别。</span></a></li></ol>
+<blockquote>
+<p>在ES6之前，JavaScript是没有类和继承这个概念的。ECMAScript 2015 中引入的 JavaScript 类实质上是 JavaScript 现有的基于原型的继承的语法糖。类语法不会为JavaScript引入新的面向对象的继承模型。所以我们在ES6之前实现类和类的继承是通过原型链来实现的。</p>
+</blockquote>
+<h2 id="如何使用prototype实现继承？"><a href="#如何使用prototype实现继承？" class="headerlink" title="如何使用prototype实现继承？"></a>如何使用prototype实现继承？</h2><p>  首先我们需要定义一个对象，对象里存放对象自身的属性，同时对象的私有属性<em>proto</em>指向它的原型prototype，就可以存放对象的共有属性。例如：</p>
+<pre><code>function Human(name){
+  this.name = name
+}
+Human.prototype.say = function(){
+  console.log(&quot;我叫&quot; + this.name + &quot;,我在说话”)    
+}
+</code></pre><p>  这样我们就实现了一个对象的定义和添加了对象的方法。如果我们要让对象的子对象拥有对象的方法，怎么实现呢？答案很简单，我们只要让子对象的私有属性<em>proto</em>指向父对象即可。</p>
+<pre><code>function Man(name){
+  Human.call(this, name)
+  this.sex = &apos;男&apos;    
+}
+Man.prototype._proto_ = Human.prototype
+</code></pre><p>  但是IE不支持<strong>man.prototype.<em>proto</em> = Human.prototype</strong>这种写法。所以我们只能通过新建一个空函数并让子对象指向空函数的方式来实现。</p>
+<pre><code>var f = {}
+f.prototype = Human.prototype
+man.prototype = new f()
+</code></pre><p>  实现原理是因为new运算符会</p>
+<pre><code>// 1. 首先创建一个空函数
+var object = new Fn();
+// 2. 将空对象的原型赋值为构造器函数的原型
+object.__proto__ = Fn.prototype;
+// 3. 更改构造器函数内部this，将其指向新创建的空对象
+Fn.call(this);
+// 4. 返回结果
+return this
+</code></pre><p>  所以我们创建空函数的过程中就会让空函数指向它的原型对象。我们只要让<strong>Fn.prototype = new f()</strong>就可以。但是因为<strong>Fn.call(this)</strong>的存在，会让子对象也有父对象的方法，这是我们不想要的结果。所以，我们需要一个中间过渡的空函数。</p>
+<p>  让子对象的原型指向空函数，空函数的原型指向父对象。这样就能子对象中避免call(this)返回我们不想要的父对象的方法。</p>
+<pre><code>function Human(name){
+    this.name = name
+}
+Human.prototype.say = function(){
+    console.log(&quot;我叫&quot;+this.name+&quot;，我在说话&quot;)
+    return undefined
+}
+function Man(name){
+    Human.call(this, name)
+    this.sex = &apos;男&apos;
+}
+
+var f = function(){}
+f.prototype = Human.prototype
+Man.prototype = new f()
+
+Man.prototype.sleep = function(){
+    console.log(&apos;我在睡觉&apos;)
+}
+</code></pre><h2 id="使用Class语法糖如何继承？"><a href="#使用Class语法糖如何继承？" class="headerlink" title="使用Class语法糖如何继承？"></a>使用Class语法糖如何继承？</h2><p>  首先Class是ES6出现的语法糖。用Class实现继承的语法非常简单。代码如下：</p>
+<pre><code>class Human{
+  constructor(name){
+    this.name = name
+  }
+  say(){
+    console.log(&quot;我叫&quot; + this.name + &quot;，我在说话&quot;)
+  }
+}
+class Man extends Human{
+  constructor(name){
+    super(name)
+    this.sex = &apos;男&apos;     
+  }
+  sleep(){
+    console.log(&apos;我在睡觉&apos;)
+  }
+}
+</code></pre><p><strong>expends</strong>表示Man对象接上Human对象的原型链<strong>constructor</strong>调用了父类的构造函数。<strong>super</strong>表示传递的属性。</p>
+<h2 id="比较这两者之间的区别。"><a href="#比较这两者之间的区别。" class="headerlink" title="比较这两者之间的区别。"></a>比较这两者之间的区别。</h2><p>  如果我们想在原型上声明一个属性，后者不支持声明属性。只能采取较为变通的写法:</p>
+<p>Class声明变量</p>
+<pre><code>class Man extends Human{
+  constructor(name){
+    super(name)
+    this.sex = &apos;男&apos;     
+  }
+  get 种族(){
+    return &apos;人类&apos;
+  }
+  sleep(){
+    console.log(&apos;我在睡觉&apos;)
+  }
+}
+</code></pre><p>ES5声明变量</p>
+<pre><code>function Human(name){
+    this.name = name
+}
+Human.prototype.种族 = &apos;人类&apos;
+Human.prototype.say = function(){
+    console.log(&quot;我叫&quot;+this.name+&quot;，我在说话&quot;)
+    return undefined
+}
+</code></pre><p>  结论：前者比后者清晰，后者比前者简单。</p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/JavaScript/">JavaScript</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2019 SmallYU. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/Avatar.jpg" alt="作者的图片">
+        
+            <h4 id="about-card-name">SmallYU</h4>
+        
+            <div id="about-card-bio"><p>Web前端工程师，前端菜鸟，博客新人，欢迎沟通与交流~</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>Web前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                HangZhou
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-vufjrm3fmbuttogo1hxuu0w9w0sesk5iyysjuguc2hdhufot9szxg8twijry.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+    </body>
+</html>
