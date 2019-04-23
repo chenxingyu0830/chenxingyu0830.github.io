@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2019-04-23T12:15:14.137Z</updated>
+  <updated>2019-04-23T13:33:56.680Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈web前端性能优化</title>
+    <link href="/2019/04/22/%E6%B5%85%E8%B0%88web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>/2019/04/22/浅谈web前端性能优化/</id>
+    <published>2019-04-22T12:11:34.000Z</published>
+    <updated>2019-04-23T13:33:56.680Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要介绍前端性能优化需要做的事以及需要考虑的问题。<br><a id="more"></a></p><!-- toc --><p>首先我们要知道，前端优化的目的是什么？</p><ol><li>从用户角度而言，优化能够让页面加载得更快、对用户的操作响应得更及时，能够给用户提供更为友好的体验。</li><li>从服务商角度而言，优化能够减少页面请求数、或者减小请求所占带宽，能够节省可观的资源。<br>总之，恰当的优化不仅能够改善站点的用户体验并且能够节省相当的资源利用。</li></ol><h2 id="Web性能优化的分析"><a href="#Web性能优化的分析" class="headerlink" title="Web性能优化的分析"></a>Web性能优化的分析</h2><blockquote><p>首先按下回车加载网页的过程中，会有哪些与前端相关的过程？</p></blockquote><ol><li>判断网站是否存在缓存</li><li>DNS查询</li><li>建立TCP连接</li><li>发送请求</li><li>接收响应</li><li>接收响应完成</li><li>查看DOCTYPE来判断文件类型 html/xml</li><li>逐行解析渲染网页</li><li>下载并解析CSS文件</li><li>下载并解析JS文件</li></ol><p>这些过程中，有些步骤我们是可以进行性能优化的。</p><ol><li>我们可以减少DNS的查询，增加域名。因为一个域名只能同时下载4个文件。</li><li>TCP连接复用</li><li>发送Http请求过程中，可以减少cookie的使用和使用Cache-Control。</li><li>接收响应过程中，可以使用ETag发出304的响应，不需要重新下载文件。同时还可以使用Gzip。</li><li>DOCTYPE类型声明必须要有，因为不写浏览器会自己根据内容判断文件类型，占用时间。</li><li>CSS &amp; JS文件使用CDN。CDN全称是Content Delivery Network，即内容分发网络。CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。 CDN的关键技术主要有内容存储和分发技术。</li><li>CSS文件应放在Head标签内，因为CSS文件如果放在后面会造成下载时堵塞页面的渲染。</li><li>JS文件应放在body标签最后，因为就算JS文件一开始不加载也不影响网站样式，放在前面会堵塞页面的渲染。</li><li>使用懒加载，一页屏幕一页屏幕的渲染，避免下载内容浪费的时间。</li></ol><h2 id="Web性能优化的对策"><a href="#Web性能优化的对策" class="headerlink" title="Web性能优化的对策"></a>Web性能优化的对策</h2><blockquote><p>这里总结了一些前端性能优化的方法</p></blockquote><h3 id="页面内容"><a href="#页面内容" class="headerlink" title="页面内容"></a>页面内容</h3><h4 id="减少HTTP请求数"><a href="#减少HTTP请求数" class="headerlink" title="减少HTTP请求数"></a>减少HTTP请求数</h4><p>合并JS/CSS文件。服务器端（CDN）自动合并，基于Node.js的文件合并工具，通过把所有脚本放在一个文件中的方式来减少请求数。</p><h4 id="减少DNS查询"><a href="#减少DNS查询" class="headerlink" title="减少DNS查询"></a>减少DNS查询</h4><p>减少不同的主机名可减少DNS查找，减少不同主机名的数量同时也减少了页面能够并行下载的组件数量，避免DNS查找削减了响应时间，而减少并行下载数量却增加了响应时间。原则是把组件分散在2到4个主机名下，这是同时减少DNS查找和允许高并发下载的折中方案。</p><h4 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h4><p>页面初始加载时哪些内容是绝对必需的？不在答案之列的资源都可以延迟加载。比如：</p><ul><li>非首屏使用的数据、样式、脚本、图片等；</li><li>用户交互时才会显示的内容。</li></ul><p>遵循「渐进增强」理念开发的网站：JavaScript用于增强用用户体验，但没有（不支持） JavaScript也能正常工作，完全可以延迟加载JavaScript。</p><h4 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h4><p>预先加载利用浏览器空闲时间请求将来要使用的资源，以便用户访问下一页面时更快地响应。</p><h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><h4 id="使用CDN"><a href="#使用CDN" class="headerlink" title="使用CDN"></a>使用CDN</h4><p>内容分发网络（CDN）是一组分散在不同地理位置的web服务器，用来给用户更高效地发送内容。典型地，选择用来发送内容的服务器是基于网络距离的衡量标准的。例如：选跳数（hop）最少的或者响应时间最快的服务器。</p><h4 id="添加Expires或Cache-Control响应头"><a href="#添加Expires或Cache-Control响应头" class="headerlink" title="添加Expires或Cache-Control响应头"></a>添加Expires或Cache-Control响应头</h4><ul><li>静态内容：将 Expires 响应头设置为将来很远的时间，实现「永不过期」策略；</li><li>动态内容：设置合适的 Cache-Control 响应头，让浏览器有条件地发起请求。</li></ul><h4 id="启用Gzip"><a href="#启用Gzip" class="headerlink" title="启用Gzip"></a>启用Gzip</h4><p>Gzip压缩通常可以减少70%的响应大小，对某些文件更可能高达90%，比Deflate更高效。主流 Web 服务器都有相应模块，而且绝大多数浏览器支持gzip解码。所以，应该对HTML、CSS、JS、XML、JSON等文本类型的内容启用压缩。</p><blockquote><p>注意 图片和 PDF 文件不要使用 gzip。它们本身已经压缩过，再使用 gzip 压缩不仅浪费 CPU 资源，而且还可能增加文件体积。</p></blockquote><h4 id="配置-Etag"><a href="#配置-Etag" class="headerlink" title="配置 Etag"></a>配置 Etag</h4><p>实体标签（ETags），是服务器和浏览器用来决定浏览器缓存中组件与源服务器中的组件是否匹配的一种机制（“实体”也就是组件：图片，脚本，样式表等等）。添加ETags可以提供一种实体验证机制，比最后修改日期更加灵活。一个ETag是一个字符串，作为一个组件某一具体版本的唯一标识符。唯一的格式约束是字符串必须用引号括起来，源服务器用相应头中的ETag来指定组件的ETag。</p><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><h4 id="减少-Cookie-大小"><a href="#减少-Cookie-大小" class="headerlink" title="减少 Cookie 大小"></a>减少 Cookie 大小</h4><p>Cookie被用于身份认证、个性化设置等诸多用途。Cookie通过HTTP头在服务器和浏览器间来回传送，减少Cookie大小可以降低其对响应速度的影响。</p><ul><li>去除不必要的 Cookie；</li><li>尽量压缩 Cookie 大小；</li><li>注意设置 Cookie 的 domain 级别，如无必要，不要影响到 sub-domain；</li><li>设置合适的过期时间。</li></ul><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><h4 id="把样式表放在中"><a href="#把样式表放在中" class="headerlink" title="把样式表放在中"></a>把样式表放在<head><meta name="generator" content="Hexo 3.8.0">中</head></h4><p>把样式表放在<head><meta name="generator" content="Hexo 3.8.0">中可以让页面渐进渲染，尽早呈现视觉反馈，给用户加载速度很快的感觉。<br>这对内容比较多的页面尤为重要，用户可以先查看已经下载渲染的内容，而不是盯着白屏等待。<br>如果把样式表放在页面底部，一些浏览器为减少重绘，会在 CSS 加载完成以后才渲染页面，用户只能对着白屏干瞪眼，用户体验极差。把样式表放到文档的HEAD部分能让页面看起来加载地更快。</head></p><h3 id="Javasript"><a href="#Javasript" class="headerlink" title="Javasript"></a>Javasript</h3><h4 id="把脚本放在页面底部"><a href="#把脚本放在页面底部" class="headerlink" title="把脚本放在页面底部"></a>把脚本放在页面底部</h4><p>浏览器下载脚本时，会阻塞其他资源并行下载，即使是来自不同域名的资源。因此，最好将脚本放在底部，以提高页面加载速度。</p><h4 id="压缩JavaScript和CSS"><a href="#压缩JavaScript和CSS" class="headerlink" title="压缩JavaScript和CSS"></a>压缩JavaScript和CSS</h4><p>压缩代码可以移除非功能性的字符（注释、空格、空行等），减少文件大小，提高载入速度。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《雅虎35条军规——前端性能优化》<br><a href="https://juejin.im/post/5b73ef38f265da281e048e51" target="_blank" rel="noopener">https://juejin.im/post/5b73ef38f265da281e048e51</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要介绍前端性能优化需要做的事以及需要考虑的问题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="总结" scheme="/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="杂谈" scheme="/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript模拟实现继承及ES6写法</title>
